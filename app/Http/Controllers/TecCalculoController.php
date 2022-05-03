@@ -46,6 +46,8 @@ class TecCalculoController extends Controller
         $rules=[
             'titulo'      =>  'required',
             'descripcion'  =>  'required',
+            'anio_escolaridad'  =>  'required',
+            'escolaridad_paralelo'  =>  'required',
             'nivel'  =>  'required',
             'puntaje'  =>  'required',
             'tiempo'  =>  'required',
@@ -58,6 +60,8 @@ class TecCalculoController extends Controller
         $messages =[
             'titulo.required' => 'El titulo es requerido.',
             'descripcion.required' => 'La descripción es requerido.',
+            'anio_escolaridad.required' => 'El año de escolaridad es requerido.',
+            'escolaridad_paralelo.required' => 'El paralelo es requerido.',
             'nivel.required'  =>  'El nivel del juego es requerido.',
             'puntaje.required'  =>  'Es puntaje del juego es requerido.',
             'tiempo.required'  =>  'El tiempo de juego es requerido.',
@@ -89,19 +93,15 @@ class TecCalculoController extends Controller
             for($i=0; $i<$longitud; $i++){
                $celdaPregunta=$pregunta[$i];
                $celdaRespuesta=$respuesta[$i];
-
-            //    $celdaPreguntaArray="";
-            //    echo "$celdaPregunta";
-            //    $celdaPreguntaArray=array("$celdaPregunta"=>"$i");
-               array_push($matrizEmparejamientoArray,$celdaPregunta);
-               array_push($matrizEmparejamientoArray,$celdaRespuesta);
-
-
+               $celdaPreguntaArray = array ("CELADAPREGUNTA"=>$celdaPregunta, "CELDANUMEROPREGUNTA"=> $i);
+               $celdaRespuestaArray = array ("CELDARESPUESTA"=>$celdaRespuesta, "CELDANUMERORESPUESTA" => $i);
+               array_push($matrizEmparejamientoArray,$celdaPreguntaArray);
+               array_push($matrizEmparejamientoArray,$celdaRespuestaArray);
             }
             $matrizEmparejamiento = json_encode($matrizEmparejamientoArray);
             // print_r($matrizEmparejamientoArray);
             /*------------------ almacenar video ------------------*/
-            $formato = array('.jpg', '.png');//extenciones validas
+            $formato = array('.jpg', '.png', '.jpeg','.JPG', '.PNG', '.JPEG');//extenciones validas
             $imagen_juego = ($_FILES['imagen_juego']['name']);//Nombre de la imagen
             $extencion = substr($imagen_juego, strrpos($imagen_juego, '.'));//Extencion de la imagen 
             if(!in_array($extencion, $formato)) {
@@ -121,6 +121,8 @@ class TecCalculoController extends Controller
             $tecCalculo->titulo = e($request->input('titulo'));
             $tecCalculo->imagen = $nombreArchivo;
             $tecCalculo->descripcion = e($request->input('descripcion'));
+            $tecCalculo->anio_escolaridad = e($request->input('anio_escolaridad'));
+            $tecCalculo->escolaridad_paralelo = e($request->input('escolaridad_paralelo'));
             $tecCalculo->nivel = e($request->input('nivel'));
             $tecCalculo->puntaje = e($request->input('puntaje'));
             $tecCalculo->tiempo = e($request->input('tiempo'));
@@ -198,15 +200,43 @@ class TecCalculoController extends Controller
             return redirect()->route('listar_tec_calculo');
         }
     }
-
     public function tecnicaCalculos(){
-        $tecCalculo = DB::table('tec_calculos')
-        ->join('users', 'users.id', '=' ,'tec_calculos.usuario_id')
-        ->select('tec_calculos.id','tec_calculos.titulo','tec_calculos.descripcion','tec_calculos.nivel','tec_calculos.puntaje','tec_calculos.estado as estadoTEC','users.estado','users.name')
+        /*--------------------- Datos alumno  ---------------------*/
+        $usuario_id=auth()->user()->id;
+        $InformacionEstudiante = DB::table('personas')
+        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')
+        ->select('alumnos.codigo_rude','alumnos.anio_escolaridad','alumnos.paralelo')
         ->get();
-        return view('tec_calculo.listar_juego_emparejamiento')->with(compact('tecCalculo'));
+        $DatosAlumno=$InformacionEstudiante[0];
+        $RudeEstudiante = intval($DatosAlumno->codigo_rude);
+        $AnioEscolaridadEstudiante = $DatosAlumno->anio_escolaridad;
+        $ParaleloEstudiante = $DatosAlumno->paralelo;
+        /*---------------------------------------------------------*/
+        /*--------    Listar Tecnicas de concentracion     --------*/
+        $juegoInformacion = DB::table('tec_calculos')
+        ->where('anio_escolaridad', '=', $AnioEscolaridadEstudiante)
+        ->where('escolaridad_paralelo', '=', $ParaleloEstudiante)
+        ->get();
+        /*---------------------------------------------------------*/
+        return view('tec_calculo.listar_juego_emparejamiento')->with(compact('juegoInformacion','RudeEstudiante','AnioEscolaridadEstudiante','ParaleloEstudiante'));
     }
-    public function gameEmparejamiento(){
-         return view('tec_calculo.juego_emparejamiento'); 
+    public function gameEmparejamiento($idTecnicaJuego){
+        /*------------------------------------------ Datos alumno ------------------------------------------*/
+        $usuario_id=auth()->user()->id;
+        $InformacionEstudiante = DB::table('personas')
+        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')->select('alumnos.codigo_rude')->get();
+        $DatosAlumno=$InformacionEstudiante[0];
+        $numero_rude = intval($DatosAlumno->codigo_rude);
+        /*--------------------------------------------------------------------------------------------------*/
+        /*------------------------------------------------ Obtener tecnica de la cadena  ------------------------------------------------*/
+        $InformacionJuego = DB::table('tec_calculos')->where('id', '=' ,$idTecnicaJuego)->get();
+        $DatosJuego = $InformacionJuego[0];
+        $celdasMatriz = $DatosJuego->tabla_respuesta;
+        $puntajeJuego = $DatosJuego->puntaje;
+        $numeroCeldasMatriz = json_decode($celdasMatriz, TRUE);
+        $puntajeEmparejamiento = count($numeroCeldasMatriz);
+        $puntajeEmparejamiento = $puntajeJuego/($puntajeEmparejamiento/2);
+        /*-------------------------------------------------------------------------------------------------------------------------------*/
+        return view('tec_calculo.juego_Emparejamiento')->with(compact('DatosJuego','numero_rude','celdasMatriz','puntajeEmparejamiento'));
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
 use App\Archivo;
 use App\Prueba;
+use App\Persona;
 use Carbon\carbon;
 use DB;
 
@@ -18,10 +19,11 @@ class PruebaController extends Controller
      */
     public function index()
     {
-        $pruebas = DB::table('pruebas')
-        ->join('users', 'users.id', '=' ,'pruebas.usuario_id')
-        ->select('pruebas.id', 'pruebas.prueba','pruebas.tipo_pregunta','pruebas.pregunta','pruebas.respuesta','pruebas.puntaje','pruebas.estado as estadoPRU','users.estado','users.name')
-        ->get();
+        // $pruebas = DB::table('pruebas')
+        // ->join('users', 'users.id', '=' ,'pruebas.usuario_id')
+        // ->select('pruebas.id', 'pruebas.prueba','pruebas.tipo_pregunta','pruebas.pregunta','pruebas.respuesta','pruebas.puntaje','pruebas.estado as estadoPRU','users.estado','users.name')
+        // ->get();
+        $pruebas = $escuelas = Prueba::all();
         return view('prueba.listar')->with(compact('pruebas'));
     }
 
@@ -47,6 +49,9 @@ class PruebaController extends Controller
             $usuario_id=auth()->user()->id;
         /* --------------------------------------------------- */
         $rules=[
+            
+            'anio_escolaridad' => 'required',
+            'escolaridad_paralelo' => 'required',
             'prueba'      =>  'required',
             'tipo_pregunta'  =>  'required',
             'pregunta'  =>  'required',
@@ -56,6 +61,8 @@ class PruebaController extends Controller
         ];
  
         $messages =[
+            'anio_escolaridad.required' => 'Seleccione año escolaridad.',
+            'escolaridad_paralelo.required' => 'Seleccione paralelo.',
             'prueba.required' => 'Seleccione la prueba.',
             'tipo_pregunta.required' => 'Seleccione el tipo de pregunta.',
             'pregunta.required' => 'La pregunta es requerida.',
@@ -149,7 +156,12 @@ class PruebaController extends Controller
                 }
                 $respuesta = json_encode(e($request->input('respuetaabierta')));
             }
+            if(e($request->input('SeccionPrueba')) != ""){$seccionpruebaestudiante = e($request->input('SeccionPrueba'));}else{$seccionpruebaestudiante = e($request->input('prueba'));}
+            $registroTablaPrueba = Prueba::count(); $idPruebaTabla=$registroTablaPrueba+1;
             $prueba = new prueba;
+            $prueba->id = $idPruebaTabla;
+            $prueba->anio_escolaridad = e($request->input('anio_escolaridad'));
+            $prueba->escolaridad_paralelo = e($request->input('escolaridad_paralelo'));
             $prueba->prueba = e($request->input('prueba'));
             $prueba->tipo_pregunta = e($request->input('tipo_pregunta'));
             $prueba->pregunta = e($request->input('pregunta'));
@@ -160,6 +172,7 @@ class PruebaController extends Controller
             $prueba->orden = e($request->input('orden'));
             $prueba->usuario_id = $usuario_id;
             $prueba->estado = 0;
+            $prueba->seccion = $seccionpruebaestudiante;
             if($prueba->save()):
                 return back()->withErrors($validator)->with('message','La preguta de la prueba a sido registrada.')->with('typealert', 'success');
             endif;
@@ -243,4 +256,54 @@ class PruebaController extends Controller
             return $nombreImagenSistema;
         };
     }
+
+    /**
+    * Listar todas las pruebas
+    */
+    public function pruebaAlumno($prueba){
+        /*------------------------ usuario id  ----------------------*/
+            $usuario_id=auth()->user()->persona_id;
+        /* ------------------------******--------------------------- */
+        $personaAlumno=DB::table('personas')
+                ->select('nombre','apellido_paterno','apellido_materno')
+                ->where('personas.ci', '=', $usuario_id)
+                ->get();
+        $nombreAlumno = $personaAlumno[0]->nombre." ".$personaAlumno[0]->apellido_paterno." ".$personaAlumno[0]->apellido_materno;
+        // Obtenemos el id de persona  =  para obtener los datos del alumno
+            $persona_id=DB::table('personas')
+                ->select('personas.id','nombre')
+                ->where('personas.ci', '=', $usuario_id)
+                ->first()->id;
+        // Obtenemos el año de escolaridad del alumno y el paralelo para mostrarle su test
+            $alumno_datos=DB::table('alumnos')
+                ->select('codigo_rude','anio_escolaridad','paralelo')
+                ->where('id_persona', '=', $persona_id)
+                ->get();
+            $anio_escolaridad = $alumno_datos[0]->anio_escolaridad;
+            $paralelo = $alumno_datos[0]->paralelo;
+            $estudianterude = $alumno_datos[0]->codigo_rude;
+        // Prueba estudiante
+        $pruebasPreguntaEstudiante = DB::table('pruebas')
+        ->select('id','prueba','tipo_pregunta','pregunta','respuesta','orden','imagen','seccion')
+        ->orderBy('orden', 'ASC')
+        ->where('anio_escolaridad', '=', $anio_escolaridad)
+        ->where('escolaridad_paralelo', '=', $paralelo)
+        ->where('prueba','=',$prueba)
+        ->get();
+        // Prueba calificacion
+        $nombrePrueba = $pruebasPreguntaEstudiante[0]->prueba;
+        $pruebaCalificacion = DB::table('pruebas')->where('anio_escolaridad', '=', $anio_escolaridad)->where('escolaridad_paralelo', '=', $paralelo)->where('prueba','=',$prueba)->sum('puntaje');
+        // Prueba tiempo  
+        $pruebaTiempo = DB::table('pruebas')->where('anio_escolaridad', '=', $anio_escolaridad)->where('escolaridad_paralelo', '=', $paralelo)->where('prueba','=',$prueba)->sum('tiempo_respuesta');
+        // Prueba numero de preguntas
+        $numero_preguntas_prueba = count($pruebasPreguntaEstudiante);
+        if($prueba == "general"){
+            return view('prueba.pruebaGeneralEstudiante')->with(compact('nombreAlumno','pruebasPreguntaEstudiante',"numero_preguntas_prueba","pruebaCalificacion","pruebaTiempo","estudianterude","nombrePrueba"));
+        }else{
+            return view('prueba.pruebaEstudiante')->with(compact('nombreAlumno','pruebasPreguntaEstudiante',"numero_preguntas_prueba","pruebaCalificacion","pruebaTiempo","estudianterude","nombrePrueba"));
+        }
+        // print_r($pruebasPreguntaEstudiante);
+    }
+
+  
 }

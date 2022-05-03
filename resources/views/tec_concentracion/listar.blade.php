@@ -19,7 +19,6 @@
                         <thead>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
                                 <th>Profesor</th>
@@ -29,7 +28,6 @@
                         <tfoot>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
                                 <th>Profesor</th>
@@ -41,7 +39,6 @@
                             @foreach($juegoVideo as $juego)
                                 <tr>
                                     <td>{{ $juego->titulo}}</td>
-                                    <td>{{ $juego->descripcion}}</td>
                                     <td>{{ $juego->nivel}}</td>
                                     <td>{{ $juego->puntaje}}</td>
                                     <td>{{ $juego->name}}</td>

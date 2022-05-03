@@ -108,6 +108,40 @@
                     <section>
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            <h5 class="form_descripcion">Año de escolaridad:</h5>
+                                            <div class="card">
+                                                <select name="anio_escolaridad" class="form-control" required="" data-validation-required-message="Seleccione año escolaridad.">
+                                                    <option value="" class="placeholderselect" disabled="" selected="">Seleccione año de escolaridad.
+                                                    </option>
+                                                    <option value="PRIMERO">PRIMERO</option>
+                                                    <option value="SEGUNDO">SEGUNDO</option>
+                                                    <option value="TERCERO">TERCERO</option>
+                                                    <option value="CUARTO">CUARTO</option>
+                                                    <option value="QUINTO">QUINTO</option>
+                                                    <option value="SEXTO">SEXTO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <h5 class="form_descripcion">Paralelo:</h5>
+                                        <div class="card">
+                                            <select name="escolaridad_paralelo" class="form-control" required="" data-validation-required-message="El paralelo es requerido">
+                                                <option value="" class="placeholderselect" disabled="" selected="">Seleccione paralelo.
+                                                </option>
+                                                <option value="A">Todos</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="nivel">Nivel de complejidad :</label>
                                     <select name="nivel" id="select" class="form-control required" required
@@ -137,19 +171,24 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="fecha_inicio">Fecha inicio de juego:</label>
-                                <input type="date" name="fecha_inicio" class="form-control requiredo" required
-                                data-validation-required-message="El campo fecha de inicio de juego es requerido."
-                                id="fecha_inicio">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="fecha_fin">Fecha fin de juego:</label>
-                                <input type="date" name="fecha_fin" class="form-control required" required
-                                data-validation-required-message="El campo fecha de finalización de juego es requerido."
-                                id="fecha_fin">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <h5 class="form_descripcion">Fecha inicio de juego:</h5>
+                                        <div class="card">
+                                            <input type="date" name="fecha_inicio" class="form-control requiredo" required
+                                            data-validation-required-message="El campo fecha de inicio de juego es requerido."
+                                            id="fecha_inicio">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <h5 class="form_descripcion">Fecha fin de juego:</h5>
+                                    <div class="card">
+                                        <input type="date" name="fecha_fin" class="form-control required" required data-validation-required-message="El campo fecha de finalización de juego es requerido."
+                                        id="fecha_fin">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -213,7 +252,6 @@
     });
 
 </script>
-<!-- bootstrap-fileinput -->
 <script src="{{ ('assets/plugins/fileinput/js/fileinput.min.js') }}" type="text/javascript"></script>
 <script src="{{ ('assets/plugins/fileinput/js/locales/es.js') }}" type="text/javascript"></script>	
 {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> --}}

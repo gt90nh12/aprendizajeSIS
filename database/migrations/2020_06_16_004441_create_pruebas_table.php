@@ -20,12 +20,15 @@ class CreatePruebasTable extends Migration
             $table->text('pregunta');
             $table->text('imagen');
             $table->json('respuesta');
-            $table->integer('puntaje');
+            $table->decimal('puntaje',5,2);
             $table->time('tiempo_respuesta');
             $table->integer('orden');
             $table->integer('usuario_id');
             $table->timestamps();
+            $table->text('anio_escolaridad');
+            $table->text('escolaridad_paralelo');
             $table->boolean('estado');
+            $table->text('seccion');
         });
     }
 

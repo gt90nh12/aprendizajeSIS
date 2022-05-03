@@ -22,7 +22,6 @@
                                 <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
@@ -32,7 +31,6 @@
                                 <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </tfoot>
@@ -44,10 +42,9 @@
                                     <td>{{ $tecnicas->descripcion}}</td>
                                     <td>{{ $tecnicas->nivel}}</td>
                                     <td>{{ $tecnicas->puntaje}}</td>
-                                    <td>{{ $tecnicas->name}}</td>
                                     <td>
                                         <a href="{{ route('calificacion_estudiante', $numero_Rude) }}" class="btn btn-secondary icon icon-notebook"> </a>
-                                        <a href="{{ route('juego_cadena') }}" class="btn btn-info mdi mdi-cube-outline"> </a>  
+                                        <a href="{{ route('juego_cadena',$tecnicas->id) }}" class="btn btn-info mdi mdi-cube-outline"> </a>  
                                     </td>                                 
                                 </tr>
                             @endforeach

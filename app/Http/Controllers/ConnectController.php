@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
 use App\User;
+use App\activityLog;
 use App\Role;
 use App\Persona;
 use DB;
 use Carbon\carbon;
+use Session;
 
 
 class ConnectController extends Controller
@@ -32,17 +34,40 @@ class ConnectController extends Controller
         else:
             
             if (Auth::attempt(['name' => $request->input('name'), 'password'=>$request->input('password')])){
+                $user = Auth::User();
+                Session::put('user', $user);
+                $user=session::get('user');
+                $name = $user->name;
+                $email = $user->email;
+                $dt = Carbon::now();
+                $todayDate = $dt->toDayDateTimeString();
+                $activityLog = [
+                    'name'=>$name,
+                    'email'=>$email,
+                    'description'=>'Inicio de sesión',
+                    'date_time'=>$todayDate
+                ];
+                
                 $rol=DB::table('users')
                     ->select('roles.nobre')
-                    ->where('users.name', '=', $request->input('name'))
                     ->join('roles','users.role','roles.id')
+                    ->where('users.name', '=', $request->input('name'))
                     ->first()->nobre;
                 if($rol==="Administrador"){
+                    DB::table('activity_logs')->insert($activityLog);
                     return view('connect.ad');
                 }   
                 if($rol==="Estudiante"){
+                    DB::table('activity_logs')->insert($activityLog);
                     return view('connect.alumno');
                 }   
+                // $admin=DB::table('users')->first()->role;
+                // if($admin===0){
+                //     DB::table('activity_logs')->insert($activityLog);
+                //     return view('connect.alumno');
+                // }else{
+                //    return back()->withErrors($validator)->with('message','Usuario no es parte del sistema')->with('typealert', 'danger'); 
+                // }
             }else{
                 return back()->withErrors($validator)->with('message','Correo electronico o contraseña incorrectos.')->with('typealert', 'danger');
             }
@@ -273,7 +298,7 @@ class ConnectController extends Controller
                     $user = new user;
                     $user->id = $id;
                     $user->name = e($request->input('name'));
-                    $user->role = e($request->input('rol'));
+                    $user->role = 1;
                     $user->email = e($request->input('correo_electronico'));
                     $user->password = Hash::make($request->input('password'));
                     $user->estado = false;
@@ -292,7 +317,53 @@ class ConnectController extends Controller
     public function logout(Request $request){
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
+        $user = Auth::User();
+        Session::put('user', $user);
+        $user=session::get('user');
+        $name = $user->name;
+        $email = $user->email;
+        $dt = Carbon::now();
+        $todayDate = $dt->toDayDateTimeString();
+        $activityLog = [
+            'name'=>$name,
+            'email'=>$email,
+            'description'=>'Termino sesión de usuario.',
+            'date_time'=>$todayDate
+        ];
+
+        DB::table('activity_logs')->insert($activityLog);
+        $user = Auth::User();
         Auth::logout();
         return redirect(route('login'));
     }
+
+    //actividad del log
+    public function activityLoginLogOut(){
+        $log_usuarios = activityLog::all();
+        return view('connect.activity_log')->with(compact('log_usuarios'));
+    }
+
+    //informacion de el index
+    public function memoria(){
+        return view('tecnicasinformacion.memoria');
+    }
+    public function concentracion(){
+        return view('tecnicasinformacion.concentracion');
+    }
+    public function calculo(){
+        return view('tecnicasinformacion.calculo');
+    }
+    public function informacioncal(){
+        return view('tecnicasinformacion.informacioncal');
+    }
+    public function informacioncon(){
+        return view('tecnicasinformacion.informacioncon');
+    }
+    public function informacionme(){
+        return view('tecnicasinformacion.informacionme');
+    }
+    public function backup(){
+        return view('connect.backup');   
+    }
+  
 }

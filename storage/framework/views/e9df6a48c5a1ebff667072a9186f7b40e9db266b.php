@@ -6,12 +6,12 @@
 
 <?php $__env->startSection('archivos_style_form'); ?>
 <!-- wizard -->
-<link href="<?php echo e(('assets/plugins/wizard/steps.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(('assets/plugins/wizard/steps.css'), false); ?>" rel="stylesheet">
 <!-- bootstrap-fileinput -->
 
-<link href="<?php echo e(('assets/plugins/fileinput/css/fileinput.min.css')); ?>" media="all" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(('assets/plugins/fileinput/css/fileinput.min.css'), false); ?>" media="all" rel="stylesheet" type="text/css" />
 <!--        Dropify     -->
-<link rel="stylesheet" href="<?php echo e(('assets/plugins/dropify/dist/css/dropify.min.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(('assets/plugins/dropify/dist/css/dropify.min.css'), false); ?>">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -25,13 +25,13 @@
                 <h4 class="card-title">Crear juego</h4>
                 <?php if(Session::has('message')): ?>
                 <div class="container">
-                    <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                        <?php echo e(Session::get('message')); ?>
+                    <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                        <?php echo e(Session::get('message'), false); ?>
 
                         <?php if($errors->any()): ?>
                         <ul>
                             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li><?php echo e($error); ?></li>
+                            <li><?php echo e($error, false); ?></li>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                         <?php endif; ?>
@@ -45,22 +45,22 @@
                 
                 <!--  -->
                     <!-- Seccino de errrores-->
-                <!-- <form method="post" action="<?php echo e(route('almacenar_tec_calculo')); ?>" class="mt-5"
+                <!-- <form method="post" action="<?php echo e(route('almacenar_tec_calculo'), false); ?>" class="mt-5"
                     enctype="multipart/form-data" novalidate> -->
                     <?php echo Form::open(['url' => 'almacenar_tec_calculo', 'class'=>'validation-wizard wizard-circle',
                     'files'=>'true']); ?>
 
-                    <?php echo e(csrf_field()); ?>
+                    <?php echo e(csrf_field(), false); ?>
 
                     <?php if(Session::has('message')): ?>
                     <div class="container">
-                        <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                            <?php echo e(Session::get('message')); ?>
+                        <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                            <?php echo e(Session::get('message'), false); ?>
 
                             <?php if($errors->any()): ?>
                             <ul>
                                 <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><?php echo e($error); ?></li>
+                                <li><?php echo e($error, false); ?></li>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                             <?php endif; ?>
@@ -71,7 +71,6 @@
                         </div>
                     </div>
                     <?php endif; ?>
-                    <!-- Step 1 -->
                     <h6>Descripción</h6>
                     <section>
                         <div class="row">
@@ -104,7 +103,6 @@
                             </div>
                         </div>
                     </section>
-                    <!-- Step 2 -->
                     <h6>Contenido</h6>
                     <section>
                         <div class="row">
@@ -143,82 +141,112 @@
                                     <div id="respuesta_tabla"></div>
                                 </div>
                             </div>
-
                         </section>
-                        <!-- Step 3 -->
                         <h6>Reglas</h6>
                         <section>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group">
+                                                <h5 class="form_descripcion">Año de escolaridad:</h5>
+                                                <div class="card">
+                                                    <select name="anio_escolaridad" class="form-control" required="" data-validation-required-message="Seleccione una persona">
+                                                        <option value="" class="placeholderselect" disabled="" selected="">Seleccione año de escolaridad.
+                                                        </option>
+                                                        <option value="PRIMERO">PRIMERO</option>
+                                                        <option value="SEGUNDO">SEGUNDO</option>
+                                                        <option value="TERCERO">TERCERO</option>
+                                                        <option value="CUARTO">CUARTO</option>
+                                                        <option value="QUINTO">QUINTO</option>
+                                                        <option value="SEXTO">SEXTO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <h5 class="form_descripcion">Paralelo:</h5>
+                                            <div class="card">
+                                                <select name="escolaridad_paralelo" class="form-control" required="" data-validation-required-message="Seleccione una persona">
+                                                    <option value="" class="placeholderselect" disabled="" selected="">Seleccione paralelo.
+                                                    </option>
+                                                    <option value="A">Todos</option>
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="nivel">Nivel de complejidad :</label>
-                                        <select name="nivel" id="select" class="form-control required" required
-                                        data-validation-required-message="El campo nivel de complejidad es requerido."
-                                        id="nivel">
-                                        <option value="">Seleccione genero</option>
-                                        <option value="bajo">Bajo</option>
-                                        <option value="medio">Medio</option>
-                                        <option value="alto">Alto</option>
-                                    </select>
+                                        <select name="nivel" id="select" class="form-control required" required data-validation-required-message="El campo nivel de complejidad es requerido." id="nivel">
+                                            <option value="">Seleccione genero</option>
+                                            <option value="bajo">Bajo</option>
+                                            <option value="medio">Medio</option>
+                                            <option value="alto">Alto</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="puntuacion">Puntuación:</label>
+                                        <input type="number" name="puntaje" class="form-control required" required
+                                        data-validation-required-message="El campo puntuación de juego es requerido."
+                                        id="puntuacion">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="tiempo_juego">Tiempo de juego:</label>
+                                        <input type="time" name="tiempo" class="form-control required" required
+                                        data-validation-required-message="El campo tiempo de juego es requerido."
+                                        id="tiempo_juego">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="fecha_inicio">Fecha inicio de juego:</label>
+                                        <input type="date" name="fecha_inicio" class="form-control requiredo" required
+                                        data-validation-required-message="El campo fecha de inicio de juego es requerido."
+                                        id="fecha_inicio">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="fecha_fin">Fecha fin de juego:</label>
+                                        <input type="date" name="fecha_fin" class="form-control required" required
+                                        data-validation-required-message="El campo fecha de finalización de juego es requerido."
+                                        id="fecha_fin">
+                                    </div>
                                 </div>
                             </div>
+                        </section>
+                        <h6>Guardar</h6>
+                        <section>
+                         <div class="row align-items-center">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="puntuacion">Puntuación:</label>
-                                    <input type="number" name="puntaje" class="form-control required" required
-                                    data-validation-required-message="El campo puntuación de juego es requerido."
-                                    id="puntuacion">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="tiempo_juego">Tiempo de juego:</label>
-                                    <input type="time" name="tiempo" class="form-control required" required
-                                    data-validation-required-message="El campo tiempo de juego es requerido."
-                                    id="tiempo_juego">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="fecha_inicio">Fecha inicio de juego:</label>
-                                    <input type="date" name="fecha_inicio" class="form-control requiredo" required
-                                    data-validation-required-message="El campo fecha de inicio de juego es requerido."
-                                    id="fecha_inicio">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="fecha_fin">Fecha fin de juego:</label>
-                                    <input type="date" name="fecha_fin" class="form-control required" required
-                                    data-validation-required-message="El campo fecha de finalización de juego es requerido."
-                                    id="fecha_fin">
+                                <div class="center-wizard">
+                                    <div class="card"> 
+                                        <img class="card-img" src="../assets/images/background/socialbg.jpg" alt="Card image">
+                                        <div class="card-img-overlay card-inverse social-profile d-flex ">
+                                            <div class="align-self-center"> <img src="#" class="img-circle" width="100">
+                                                <h4 class="card-title">Juego emparejar</h4>
+                                                <h6 class="card-subtitle"><input type="submit" class="btn btn-success" value="Guardar"></h6>
+                                                <p class="text-white">Los datos an sido registrados correctamente. se guardara la información en la base de datos. </p>
+                                            </div>
+                                        </div>
+                                    </div>    
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <!-- Step 4 -->
-                    <h6>Guardar</h6>
-                    <section>
-                     <div class="row align-items-center">
-                        <div class="col-md-12">
-                            <div class="center-wizard">
-                                <div class="card"> <img class="card-img" src="../assets/images/background/socialbg.jpg" alt="Card image">
-                                    <div class="card-img-overlay card-inverse social-profile d-flex ">
-                                        <div class="align-self-center"> <img src="#" class="img-circle" width="100">
-                                            <h4 class="card-title">Juego emparejar</h4>
-                                            <h6 class="card-subtitle"><input type="submit" class="btn btn-success" value="Guardar"></h6>
-                                            <p class="text-white">Los datos an sido registrados correctamente. se guardara la información en la base de datos. </p>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- <div class="row">
@@ -275,9 +303,9 @@
 
             <?php $__env->startSection('archivos_script_form'); ?>
             <!-- wizard -->
-            <script src="<?php echo e(('assets/plugins/wizard/jquery.steps.min.js')); ?>"></script>
-            <script src="<?php echo e(('assets/plugins/wizard/jquery.validate.min.js')); ?>"></script>
-            <script src="<?php echo e(('assets/plugins/wizard/steps.js')); ?>"></script> 
+            <script src="<?php echo e(('assets/plugins/wizard/jquery.steps.min.js'), false); ?>"></script>
+            <script src="<?php echo e(('assets/plugins/wizard/jquery.validate.min.js'), false); ?>"></script>
+            <script src="<?php echo e(('assets/plugins/wizard/steps.js'), false); ?>"></script> 
             <script>
                 let room = 0;
                 function adicionar_respuesta_tabla() {
@@ -320,8 +348,8 @@
 
 </script>
 <!-- bootstrap-fileinput -->
-<script src="<?php echo e(('assets/plugins/fileinput/js/fileinput.min.js')); ?>" type="text/javascript"></script>
-<script src="<?php echo e(('assets/plugins/fileinput/js/locales/es.js')); ?>" type="text/javascript"></script>	
+<script src="<?php echo e(('assets/plugins/fileinput/js/fileinput.min.js'), false); ?>" type="text/javascript"></script>
+<script src="<?php echo e(('assets/plugins/fileinput/js/locales/es.js'), false); ?>" type="text/javascript"></script>	
 
 <script>
         // Tipos de archivos admitidos por su extensión

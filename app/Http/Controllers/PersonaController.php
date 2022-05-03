@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
 use App\Persona;
 use Carbon\carbon;
+use Log;
 
 class PersonaController extends Controller
 {
@@ -80,6 +81,7 @@ class PersonaController extends Controller
                 'updated_at'=>Carbon::now(),
                 'estado'=>false
             ];
+            log::channel('mydailylogs')->info('Se agrego el registro de una persona al sistema:'.json_encode($persona));
             Persona::insert($persona);
             return redirect()->route('listar_persona');
             // if($user->save()):

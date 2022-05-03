@@ -19,37 +19,29 @@
                         <thead>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            <?php if(!empty($tecCalculo)): ?>
-                            <?php $__currentLoopData = $tecCalculo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tecnicas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(!empty($juegoInformacion)): ?>
+                            <?php $__currentLoopData = $juegoInformacion; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $juego): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><?php echo e($tecnicas->titulo); ?></td>
-                                    <td><?php echo e($tecnicas->descripcion); ?></td>
-                                    <td><?php echo e($tecnicas->nivel); ?></td>
-                                    <td><?php echo e($tecnicas->puntaje); ?></td>
-                                    <td><?php echo e($tecnicas->name); ?></td>
+                                    <td><?php echo e($juego->titulo, false); ?></td>
+                                    <td><?php echo e($juego->nivel, false); ?></td>
+                                    <td><?php echo e($juego->puntaje, false); ?></td>
                                     <td>
-                                     <a href="<?php echo e(route('juego_emparejamiento')); ?>" class="btn btn-info mdi mdi-cube-outline"> </a>
-                                  
+                                        <a href="<?php echo e(route('juego_emparejamiento',$juego->id), false); ?>" class="btn btn-info mdi mdi-cube-outline"> </a>
                                     </td>
-                                   
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
@@ -64,10 +56,9 @@
 <!-- End PAge Content -->
 <!-- ============================================================== -->
 <?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('archivos_script_form'); ?>
     <!-- This is data table -->
-    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js'), false); ?>"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
@@ -138,7 +129,7 @@
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js'), false); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('connect\ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/tec_calculo/listar_juego_emparejamiento.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect\alumno', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/tec_calculo/listar_juego_emparejamiento.blade.php ENDPATH**/ ?>

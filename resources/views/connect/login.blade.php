@@ -5,7 +5,7 @@
     <!--  Iniciar sesion -->
     <!-- ============================================================== -->
     <section id="wrapper" class="login-register login-sidebar"
-        style="background-image:url({{ ('assets/images/background/fondo.jpg') }});">
+        style="background-image:url({{ ('assets/images/background/gravedad.jpg') }});">
         <div class="login-box card">
             <div class="card-body">
             {!! Form::open(['url' => '/login_user']) !!}

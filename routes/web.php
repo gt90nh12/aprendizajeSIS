@@ -27,6 +27,8 @@ Route::post('/modificar_datos_usuario', 'ConnectController@modificarDatosUsuario
 Route::get('/estado_datos_usuario{id}', 'ConnectController@estadoDatosUsuarios')->name('estado_datos_usuario');
 Route::post('/registro_administrador', 'ConnectController@registroAdministrador')->name('registro_administrador');
 Route::get('/cerrar_session', 'ConnectController@logout')->name('cerrar_session');
+Route::get('/log_user', 'ConnectController@activityLoginLogOut')->name('log_user');
+
 
 //Router admin
 Route::get('/ad', 'AdministradorController@index')->name('ad');
@@ -58,7 +60,7 @@ Route::post('/almacenar_tec_cadena','TecCadenaController@store')->name('almacena
 Route::get('/mostrar_tec_cadena{id}','TecCadenaController@show')->name('mostrar_tec_cadena');
 Route::get('/estado_tcadena{id}', 'TecCadenaController@destroy')->name('estado_tcadena');
 Route::get('/listar_tecnicas', 'TecCadenaController@tecnicaCadenas')->name('listar_tecnicas');
-Route::get('/juego_cadena', 'TecCadenaController@game')->name('juego_cadena');
+Route::get('/juego_cadena{id}', 'TecCadenaController@game')->name('juego_cadena');
 Route::get('/calificacion_estudiante{id}', 'TecCadenaController@qualification')->name('calificacion_estudiante');
 
 /*-------------------------------- TECNICA DE LA CONCENTRACION  --------------------------------*/
@@ -69,23 +71,7 @@ Route::get('/mostrar_tec_concentracion{id}','TecConcentracionController@edit')->
 // Route::post('/modificar_tec_concentracion{id}', 'TecConcentracionController@update')->name('modificar_tec_concentracion');
 Route::get('/estado_tconcentracion{id}', 'TecConcentracionController@destroy')->name('estado_tconcentracion');
 Route::get('/listar_tecnicas_cocentracion', 'TecConcentracionController@tecnicaConcentracion')->name('listar_tecnicas_cocentracion');
-Route::get('/juego_video', 'TecConcentracionController@gameVideo')->name('juego_video');
-
-
-
-/*-------------------------------------- PRUEBA GENERAL  ---------------------------------------*/
-Route::get('/listar_prueba','PruebaController@index')->name('listar_prueba');
-Route::get('/crear_prueba','PruebaController@create')->name('crear_prueba');
-Route::post('/almacenar_prueba','PruebaController@store')->name('almacenar_prueba');
-Route::get('/estado_prueba{id}', 'PruebaController@destroy')->name('estado_prueba');
-
-/*-------------------------------- ESCUELA  --------------------------------*/
-Route::get('/listar_escuela','EscuelaController@index')->name('listar_escuela');
-Route::get('/crear_escuela','EscuelaController@create')->name('crear_escuela');
-Route::post('/almacenar_escuela','EscuelaController@store')->name('almacenar_escuela');
-Route::get('/editar_escuela{id}', 'EscuelaController@edit')->name('editar_escuela');
-Route::post('/modificar_escuela{id}', 'EscuelaController@update')->name('modificar_escuela');
-Route::get('/estado_escuela{id}', 'EscuelaController@destroy')->name('estado_escuela');
+Route::get('/juego_video{GameTecnicaId}', 'TecConcentracionController@game')->name('juego_video');
 
 /*-------------------------------- TECNICA CALCULO  --------------------------------*/
 Route::get('/listar_tec_calculo','TecCalculoController@index')->name('listar_tec_calculo');
@@ -95,8 +81,22 @@ Route::get('/mostrar_tec_calculo{id}', 'TecCalculoController@edit')->name('mostr
 // Route::post('/modificar_escuela{id}', 'EscuelaController@update')->name('modificar_escuela');
 Route::get('/estado_tec_calculo{id}', 'TecCalculoController@destroy')->name('estado_tec_calculo');
 Route::get('/listar_tecnicas_calculo', 'TecCalculoController@tecnicaCalculos')->name('listar_tecnicas_calculo');
-Route::get('/juego_emparejamiento', 'TecCalculoController@gameEmparejamiento')->name('juego_emparejamiento');
+Route::get('/juego_emparejamiento{GameTecnicaId}', 'TecCalculoController@gameEmparejamiento')->name('juego_emparejamiento');
 
+/*-------------------------------------- PRUEBA GENERAL  ---------------------------------------*/
+Route::get('/listar_prueba','PruebaController@index')->name('listar_prueba');
+Route::get('/crear_prueba','PruebaController@create')->name('crear_prueba');
+Route::post('/almacenar_prueba','PruebaController@store')->name('almacenar_prueba');
+Route::get('/estado_prueba{id}', 'PruebaController@destroy')->name('estado_prueba');
+Route::get('/prueba_estudiante{prueba}','PruebaController@pruebaAlumno')->name('prueba_estudiante');
+
+/*-------------------------------- ESCUELA  --------------------------------*/
+Route::get('/listar_escuela','EscuelaController@index')->name('listar_escuela');
+Route::get('/crear_escuela','EscuelaController@create')->name('crear_escuela');
+Route::post('/almacenar_escuela','EscuelaController@store')->name('almacenar_escuela');
+Route::get('/editar_escuela{id}', 'EscuelaController@edit')->name('editar_escuela');
+Route::post('/modificar_escuela{id}', 'EscuelaController@update')->name('modificar_escuela');
+Route::get('/estado_escuela{id}', 'EscuelaController@destroy')->name('estado_escuela');
 
 /*-------------------------------- DOCENTE  --------------------------------*/
 Route::get('/listar_docente','DocenteController@index')->name('listar_docente');
@@ -126,3 +126,19 @@ Route::post('/almacenar_tec_vinculo','TecVinculoController@store')->name('almace
 Route::get('/listar_tecnicas_vinculo', 'TecVinculoController@tecnicaVinculo')->name('listar_tecnicas_vinculo');
 Route::get('/juego_vinculo', 'TecVinculoController@game')->name('juego_vinculo');
 
+/*----------------------------------- INFORMACION DEL INDEX ------------------------------------------*/
+Route::get('/memoria', 'ConnectController@memoria')->name('memoria');
+Route::get('/concentracion', 'ConnectController@concentracion')->name('concentracion');
+Route::get('/calculo', 'ConnectController@calculo')->name('calculo');
+Route::get('/informacioncal', 'ConnectController@informacioncal')->name('informacioncal');
+Route::get('/informacioncon', 'ConnectController@informacioncon')->name('informacioncon');
+Route::get('/informacionme', 'ConnectController@informacionme')->name('informacionme');
+Route::get('/inicio', function () {
+    return view('welcome');
+});
+
+/*---------------------------------- LOG DEL SISTEMA ----------------------------------*/
+Route::get('/log_user', 'ConnectController@activityLoginLogOut')->name('log_user');
+
+/*---------------------------------- COPIAS DE SEGURIDAD ----------------------------------*/
+Route::get('/copia_seguridad', 'ConnectController@backup')->name('copia_seguridad');

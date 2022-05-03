@@ -15,13 +15,16 @@ class CreateCalificacionesTable extends Migration
     {
         Schema::create('calificaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('tipo_tecnica');
-            $table->text('nombre_tecnica');
+            $table->text('nombre_prueba_tecnica');
+            $table->text('id_prueba_tecnica');
+            $table->time('tiempo');
             $table->decimal('puntaje',5,2);
-            $table->date('fecha');
-            $table->time('hora');
             $table->text('rude');
             $table->text('comentario');
+            $table->decimal('memoria',5,2)->nullable();
+            $table->decimal('concentracion',5,2)->nullable();
+            $table->decimal('calculo',5,2)->nullable();
+
             $table->timestamps();
         });
     }

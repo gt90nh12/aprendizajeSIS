@@ -86,10 +86,9 @@
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                             <!-- dark Logo text -->
-                            <img src="{{ ('assets/images/logo-text.png ') }}" alt="homepage" class="dark-logo" />
+                            <!-- <img src="{{ ('assets/images/logo-text.png ') }}" alt="homepage" class="dark-logo" /> -->
                             <!-- Light Logo text -->
-                            <img src="{{ ('assets/images/logo-light-text.png ') }}" class="light-logo"
-                                alt="homepage" /></span> </a>
+                            <!-- <img src="{{ ('assets/images/logo-light-text.png ') }}" class="light-logo" alt="homepage" /></span> </a> -->
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -425,9 +424,10 @@
                         <a class="has-arrow" href="#" aria-expanded="false"><i class="ti-book"></i><span
                                 class="hide-menu">Test general</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="#">Memoria</a></li>
-                            <li><a href="#">Concentración</a></li>
-                            <li><a href="#">Cálculo</a></li>
+                            <li><a href="{{ route('prueba_estudiante','general') }}">General</a></li>
+                            <li><a href="{{ route('prueba_estudiante','memoria') }}">Memoria</a></li>
+                            <li><a href="{{ route('prueba_estudiante','concentracion') }}">Concentración</a></li>
+                            <li><a href="{{ route('prueba_estudiante','calculo') }}">Cálculo</a></li>
                         </ul>
                     </li>
                     <li class="nav-small-cap">TECNICAS DE APRENDIZAJE</li>
@@ -437,7 +437,7 @@
                                 memoria</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{url('/listar_tecnicas')}}" class="">Cadena</a></li>
-                            <li><a href="{{url('/listar_tecnicas_vinculo')}}" class="">Vinculo</a></li>
+                            <!-- <li><a href="{{url('/listar_tecnicas_vinculo')}}" class="">Vinculo</a></li> -->
                             <!-- <li><a href="form-layout.html">Categorizacion</a></li> -->
                             <!-- <li><a href="form-addons.html">Visualizacion</a></li> -->
                         </ul>

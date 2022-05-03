@@ -25,7 +25,7 @@ class AlumnoController extends Controller
         ->join('users', 'users.persona_id', '=', 'personas.ci')
         ->select('personas.id as identificador', 'users.direccion_imagen', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'alumnos.id', 'alumnos.estado', 'alumnos.anio_escolaridad', 'alumnos.paralelo', 'alumnos.codigo_rude')
         ->get();
-         return view('alumno.listar')->with(compact('alumnos'));
+        return view('alumno.listar')->with(compact('alumnos'));
     }
 
     /**
@@ -185,6 +185,11 @@ class AlumnoController extends Controller
         // $reference = $database->getReference('calificacion/calculo/15222245');
         $snapshot = $reference->getSnapshot();
         $value = $reference->getValue();
+        if(empty($value))
+        {
+         $ejeX=json_encode($x);
+         $ejeY=json_encode($y);
+     }else{
         foreach($value as $nodo=>$juego){
             foreach($juego as $descripcion=>$dato){
                 if($descripcion=="puntaje"){
@@ -196,128 +201,141 @@ class AlumnoController extends Controller
         }
         $ejeX=json_encode($x);
         $ejeY=json_encode($y);
+    }
         //*********************************** FINALIZA RESULTADOS DE CALCULO *********************************\
 
         //*************************************** RESULTADOS DE MEMORIA ***************************************
-        $contadorM=0;
-        $yM=array();
-        $xM=array();
-        $factory = (new Factory())->withDatabaseUri('https://aprendizaje-57cdc-default-rtdb.firebaseio.com/');
-        $database = $factory->createDatabase();
-        $reference = $database->getReference("calificacion/memoria/$id");
+    $contadorM=0;
+    $yM=array();
+    $xM=array();
+    $factory = (new Factory())->withDatabaseUri('https://aprendizaje-57cdc-default-rtdb.firebaseio.com/');
+    $database = $factory->createDatabase();
+    $reference = $database->getReference("calificacion/memoria/$id");
         // $reference = $database->getReference('calificacion/calculo/15222245');
-        $snapshot = $reference->getSnapshot();
-        $valueM = $reference->getValue();
-        foreach($valueM as $nodoM=>$juegoM){
-            foreach($juegoM as $descripcion=>$datoM){
-                if($descripcion=="puntaje"){
-                    $contadorM=$contadorM+1;
-                    array_push($yM, $contadorM);
-                    array_push($xM, $datoM);
-                }
+    $snapshot = $reference->getSnapshot();
+    $valueM = $reference->getValue();
+    if(empty($valueM)){
+
+    $ejeXM=json_encode($xM);
+    $ejeYM=json_encode($yM);
+    }else{
+            foreach($valueM as $nodoM=>$juegoM){
+        foreach($juegoM as $descripcion=>$datoM){
+            if($descripcion=="puntaje"){
+                $contadorM=$contadorM+1;
+                array_push($yM, $contadorM);
+                array_push($xM, $datoM);
             }
         }
-        $ejeXM=json_encode($xM);
-        $ejeYM=json_encode($yM);
+    }
+    $ejeXM=json_encode($xM);
+    $ejeYM=json_encode($yM);
+    }
         //*********************************** FINALIZA RESULTADOS DE MEMORIA *********************************\
 
         //************************************ RESULTADOS DE CONCENTRACION ************************************
-        $contadorC=0;
-        $yC=array();
-        $xC=array();
-        $factory = (new Factory())->withDatabaseUri('https://aprendizaje-57cdc-default-rtdb.firebaseio.com/');
-        $database = $factory->createDatabase();
-        $reference = $database->getReference("calificacion/concentracion/$id");
+    $contadorC=0;
+    $yC=array();
+    $xC=array();
+    $factory = (new Factory())->withDatabaseUri('https://aprendizaje-57cdc-default-rtdb.firebaseio.com/');
+    $database = $factory->createDatabase();
+    $reference = $database->getReference("calificacion/concentracion/$id");
         // $reference = $database->getReference('calificacion/calculo/15222245');
-        $snapshot = $reference->getSnapshot();
-        $valueC = $reference->getValue();
-        foreach($valueC as $nodoC=>$juegoC){
-            foreach($juegoC as $descripcion=>$datoC){
-                if($descripcion=="puntaje"){
-                    $contadorC=$contadorC+1;
-                    array_push($yC, $contadorC);
-                    array_push($xC, $datoC);
-                }
+    $snapshot = $reference->getSnapshot();
+    $valueC = $reference->getValue();
+    if(empty($valueM)){
+    $ejeXC=json_encode($xC);
+    $ejeYC=json_encode($yC);
+    }else{
+            foreach($valueC as $nodoC=>$juegoC){
+        foreach($juegoC as $descripcion=>$datoC){
+            if($descripcion=="puntaje"){
+                $contadorC=$contadorC+1;
+                array_push($yC, $contadorC);
+                array_push($xC, $datoC);
             }
         }
-        $ejeXC=json_encode($xC);
-        $ejeYC=json_encode($yC);
+    }
+    $ejeXC=json_encode($xC);
+    $ejeYC=json_encode($yC);
+    }
         //******************************** FINALIZA RESULTADOS DE CONCENTRACION ******************************
-
-        
-
+    
 
 
-        return view('alumno.progreso')->with(compact('alumnos','ids','ejeX','ejeXC','ejeXM','ejeY','ejeYC','ejeYM'));
-       
+
+
+
+    return view('alumno.progreso')->with(compact('alumnos','ids','ejeX','ejeXC','ejeXM','ejeY','ejeYC','ejeYM'));
+
         // $alumnos = DB::table('alumnos')
         // ->where('ci', '=', $id)
         // ->get();
         // return view('alumno.progreso')->with(compact('ejeX','ejeY'));
-    }
-    
-    public function historial_estudiante($rude){
-        $factory = (new Factory())->withDatabaseUri('https://aprendizaje-57cdc-default-rtdb.firebaseio.com/');
-        $database = $factory->createDatabase();
-        $reference = $database->getReference("historial/tecnicaDeCadena/$rude");
-        $snapshot = $reference->getSnapshot();
-        $value = $reference->getValue();
-        $historial =array();
-        $nodo = array();
-        foreach($value as $nodo=>$historia){
-            foreach($historia as $descripcion=>$dato){
-                if($descripcion=="puntaje"){
-                    if ($dato<=59){
-                        $nodo = array(  
-                                        "titulo" => "Puntuación baja",
-                                        "puntaje" => $historia['puntaje'],
-                                        "fecha" => $historia['fecha'],
-                                        "descripcion" => "La puntuacion obtenida es muy baja, se recomienda que el estudiante comience en el nivel basico.",
-                                        "imagen" => "bajo.svg"
-                                     );
-                    }
-                    if ($dato > 60 and $dato <= 69){
-                        $nodo = array(  
-                                        "titulo" => "Puntuación medio baja",
-                                        "puntaje" => $historia['puntaje'],
-                                        "fecha" => $historia['fecha'],
-                                        "descripcion" => "La puntuacion obtenida, es demasiado bajo.",
-                                        "imagen" => "mediobajo.svg"
-                                     );
-                    }
-                    if ($dato > 70 and $dato <= 79){
-                        $nodo = array(  
-                                        "titulo" => "Puntuación medio alta",
-                                        "puntaje" => $historia['puntaje'],
-                                        "fecha" => $historia['fecha'],
-                                        "descripcion" => "La puntuacion obtenida, es aceptable.",
-                                        "imagen" => "medioalto.svg"
-                                     );
-                    }
-                    if ($dato > 80 and $dato <= 89){
-                        $nodo = array(  
-                                        "titulo" => "Puntuación alta",
-                                        "puntaje" => $historia['puntaje'],
-                                        "fecha" => $historia['fecha'],
-                                        "descripcion" => "Felicidades se obtuvo una  puntuacion alta, falta poco para pasar de nivel.",
-                                        "imagen" => "alto.svg"
-                                     );
-                    }
-                    if ($dato > 90 and $dato <= 100){
-                        $nodo = array(  
-                                        "titulo" => "Puntuación alta",
-                                        "puntaje" => $historia['puntaje'],
-                                        "fecha" => $historia['fecha'],
-                                        "descripcion" => "Nivel superado exitosamente, la puntuacion obtenida permitira avanzar de nivel.",
-                                        "imagen" => "trofeo.png",
-                                        "nivel" => "siguenteNivel.png"
-                                     );
-                    }
-                    array_push($historial,$nodo);
+}
+
+public function historial_estudiante($rude){
+    $factory = (new Factory())->withDatabaseUri('https://aprendizaje-57cdc-default-rtdb.firebaseio.com/');
+    $database = $factory->createDatabase();
+    $reference = $database->getReference("historial/tecnicaDeCadena/$rude");
+    $snapshot = $reference->getSnapshot();
+    $value = $reference->getValue();
+    $historial =array();
+    $nodo = array();
+    foreach($value as $nodo=>$historia){
+        foreach($historia as $descripcion=>$dato){
+            if($descripcion=="puntaje"){
+                if ($dato<=59){
+                    $nodo = array(  
+                        "titulo" => "Puntuación baja",
+                        "puntaje" => $historia['puntaje'],
+                        "fecha" => $historia['fecha'],
+                        "descripcion" => "La puntuacion obtenida es muy baja, se recomienda que el estudiante comience en el nivel basico.",
+                        "imagen" => "bajo.svg"
+                    );
                 }
+                if ($dato > 60 and $dato <= 69){
+                    $nodo = array(  
+                        "titulo" => "Puntuación medio baja",
+                        "puntaje" => $historia['puntaje'],
+                        "fecha" => $historia['fecha'],
+                        "descripcion" => "La puntuacion obtenida, es demasiado bajo.",
+                        "imagen" => "mediobajo.svg"
+                    );
+                }
+                if ($dato > 70 and $dato <= 79){
+                    $nodo = array(  
+                        "titulo" => "Puntuación medio alta",
+                        "puntaje" => $historia['puntaje'],
+                        "fecha" => $historia['fecha'],
+                        "descripcion" => "La puntuacion obtenida, es aceptable.",
+                        "imagen" => "medioalto.svg"
+                    );
+                }
+                if ($dato > 80 and $dato <= 89){
+                    $nodo = array(  
+                        "titulo" => "Puntuación alta",
+                        "puntaje" => $historia['puntaje'],
+                        "fecha" => $historia['fecha'],
+                        "descripcion" => "Felicidades se obtuvo una  puntuacion alta, falta poco para pasar de nivel.",
+                        "imagen" => "alto.svg"
+                    );
+                }
+                if ($dato > 90 and $dato <= 100){
+                    $nodo = array(  
+                        "titulo" => "Puntuación alta",
+                        "puntaje" => $historia['puntaje'],
+                        "fecha" => $historia['fecha'],
+                        "descripcion" => "Nivel superado exitosamente, la puntuacion obtenida permitira avanzar de nivel.",
+                        "imagen" => "trofeo.png",
+                        "nivel" => "siguenteNivel.png"
+                    );
+                }
+                array_push($historial,$nodo);
             }
         }
-        $historialEstudiante=json_encode($historial);
-        return view('alumno.historial')->with(compact('historialEstudiante'));
     }
+    $historialEstudiante=json_encode($historial);
+    return view('alumno.historial')->with(compact('historialEstudiante'));
+}
 }

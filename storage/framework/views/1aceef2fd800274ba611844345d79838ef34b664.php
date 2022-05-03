@@ -19,7 +19,6 @@
                         <thead>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
                                 <th>Profesor</th>
@@ -29,7 +28,6 @@
                         <tfoot>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
                                 <th>Profesor</th>
@@ -40,17 +38,16 @@
                         <?php if(!empty($juegoVideo)): ?>
                             <?php $__currentLoopData = $juegoVideo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $juego): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><?php echo e($juego->titulo); ?></td>
-                                    <td><?php echo e($juego->descripcion); ?></td>
-                                    <td><?php echo e($juego->nivel); ?></td>
-                                    <td><?php echo e($juego->puntaje); ?></td>
-                                    <td><?php echo e($juego->name); ?></td>
+                                    <td><?php echo e($juego->titulo, false); ?></td>
+                                    <td><?php echo e($juego->nivel, false); ?></td>
+                                    <td><?php echo e($juego->puntaje, false); ?></td>
+                                    <td><?php echo e($juego->name, false); ?></td>
                                     <td>
-                                    <a href="<?php echo e(route('mostrar_tec_concentracion', $juego->id)); ?>" class="btn btn-info mdi mdi-cube-outline"> </a>
+                                    <a href="<?php echo e(route('mostrar_tec_concentracion', $juego->id), false); ?>" class="btn btn-info mdi mdi-cube-outline"> </a>
                                     <?php if($juego->estadoTEC==true): ?>
-                                        <a href="<?php echo e(route('estado_tconcentracion', $juego->id)); ?>" class="btn btn-success  mdi mdi-arrow-up-bold-circle"></a>
+                                        <a href="<?php echo e(route('estado_tconcentracion', $juego->id), false); ?>" class="btn btn-success  mdi mdi-arrow-up-bold-circle"></a>
                                     <?php elseif($juego->estadoTEC==false): ?>    
-                                        <a href="<?php echo e(route('estado_tconcentracion', $juego->id)); ?>" class="btn btn-danger mdi mdi-arrow-down-bold-circle"></a>
+                                        <a href="<?php echo e(route('estado_tconcentracion', $juego->id), false); ?>" class="btn btn-danger mdi mdi-arrow-down-bold-circle"></a>
                                     <?php endif; ?>
                                     </td>
                                 </tr>
@@ -70,7 +67,7 @@
 
 <?php $__env->startSection('archivos_script_form'); ?>
     <!-- This is data table -->
-    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js'), false); ?>"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
@@ -141,7 +138,7 @@
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js'), false); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('connect\ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/tec_concentracion/listar.blade.php ENDPATH**/ ?>

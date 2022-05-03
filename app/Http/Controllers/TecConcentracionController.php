@@ -16,8 +16,8 @@ class TecConcentracionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+     public function index()
+     {
         $juegoVideo = DB::table('juego_videos')
         ->join('users', 'users.id', '=' ,'juego_videos.usuario_id')
         ->select('juego_videos.id','juego_videos.titulo','juego_videos.descripcion','juego_videos.nivel','juego_videos.puntaje','juego_videos.estado as estadoTEC','users.estado','users.name')
@@ -25,7 +25,7 @@ class TecConcentracionController extends Controller
         return view('tec_concentracion.listar')->with(compact('juegoVideo'));
 
     }
-   
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,16 +47,20 @@ class TecConcentracionController extends Controller
         $rules=[
             'titulo'      =>  'required',
             'descripcion'  =>  'required',
+            'anio_escolaridad'  =>  'required',
+            'escolaridad_paralelo'  =>  'required',
             'nivel'  =>  'required',
             'puntaje'  =>  'required',
             'tiempo'  =>  'required',
             'fecha_inicio'  =>  'required',
             'fecha_fin'  =>  'required'
         ];
- 
+
         $messages =[
             'titulo.required' => 'El titulo es requerido.',
             'descripcion.required' => 'La descripción es requerido.',
+            'anio_escolaridad.required' => 'El año de escolaridad es requerido.',
+            'escolaridad_paralelo.required' => 'El paralelo es requerido.',
             'nivel.required'  =>  'El nivel del juego es requerido.',
             'puntaje.required'  =>  'Es puntaje del juego es requerido.',
             'tiempo.required'  =>  'El tiempo de juego es requerido.',
@@ -67,121 +71,83 @@ class TecConcentracionController extends Controller
         if($validator->fails()):
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
         else:
-            
             $arraypreguntas=[];
-            $pregunta=$request->input('pregunta');
-            $puntaje=$request->input('puntaje');
-            $numeropreguntas=count($pregunta);
-                for($i=0; $i<$numeropreguntas; $i++){
-                    $contador=$i+1;
-
-                    /*---Varaibles de respuesta---*/
-                    $nombrerespuesta="respuesta".$contador;
-                    $respuesta=$request->input($nombrerespuesta);
-                    $respuesta=(array)$respuesta;
-                    $numerorespuestas = count($respuesta);
-                    // echo($nombrerespuesta);
-                    $tiporespuesta=$request->input("opcionRespuesta$contador");
-                    $imagenrespuesta=$request->input("imagen_respuesta_cerrada$i");
-                    // print_r($imagenrespuesta);
-                    // print_r($tiporespuesta);
-                    
-                    $tipopregunta=$request->input("tipo_pregunta$contador");
-                    // echo($tipopregunta);
-                    if($tipopregunta == "abierta"){
+            $numeropreguntas=$request->input('juegoNumeroPreguntas');;
+            for($i=0; $i<$numeropreguntas; $i++){
+                $contador=$i+1;
+                $pregunta=$request->input("pregunta$contador");
+                $puntajeRespuesta=$request->input("puntajeRespuesta$contador");
+                if($pregunta != ''){
+                    echo ("Existe pregunta para la iteracion: ".$contador);
+                    if($request->input("tipo_pregunta$contador") == "abierta"){
                         $armarRespuesta=$request->input("respuestaabierta$contador");
                     } 
-                    else if($tipopregunta=="cerrada"){
+                    else if($request->input("tipo_pregunta$contador") =="cerrada"){
                         $armarRespuesta=[];
-                        // echo($tipopregunta);
-                        for($j=0;$j<$numerorespuestas;$j++){
-                            $respuestaArray=[];
-                            $armarRespuesta=[];
-                            if ($tipopregunta == "cerrada"){
-                                for($l=0; $l<$numerorespuestas; $l++){
-                                    // if ($_FILES["imagen_respuesta_cerrada$l"]["name"] != ""){
-                                        if ($imagenrespuesta[$l] != ""){
-
-                                        // $nombreImagen="imagen_respuesta_cerrada$l";
-                                        // $nombreImagenAlmacenada = $this->imagenStore($nombreImagen, $pruebaId);echo "hay imagen";
-                                    }else{
-                                        $nombreImagenAlmacenada = "no hay imagen";
-                                    }
-                                    $respuestaArray = array (
-                                        "respuesta"=>$respuesta[$l],
-                                        "correcto"=>$tiporespuesta[$l],
-                                        "imagen"=>$nombreImagenAlmacenada,
-                                    );
-                                    array_push($armarRespuesta, $respuestaArray);
-                                }
-                                // $respuesta = json_encode($armarRespuesta);
-                                // var_dump($respuesta);
-                            }
-
+                        $respuestaArray=[];
+                        $armarRespuesta=[];
+                        $respuesta=$request->input("respuesta$contador");
+                        // $respuesta=(array)$respuesta;
+                        $tiporespuesta=$request->input("opcionRespuesta$contador");             
+                        $numerorespuestas = count($respuesta);
+                        for($recorrerOpcionesRespuesta=0; $recorrerOpcionesRespuesta<$numerorespuestas; $recorrerOpcionesRespuesta++){
+                            $respuestaArray = array (
+                                "respuesta"=>$respuesta[$recorrerOpcionesRespuesta],
+                                "correcto"=>$tiporespuesta[$recorrerOpcionesRespuesta],
+                            );
+                            array_push($armarRespuesta, $respuestaArray);
                         }
-                        
                     }
                     else{
                         $armarRespuesta="ninguna respuesta para la pregunta";
                     }                   
-                   
                     $respuestaArray = array (
-                        "pregunta" =>$pregunta[$i],
+                        "tipo_pregunta"=>$request->input("tipo_pregunta$contador"),
+                        "pregunta" =>$pregunta[0],
                         "repuesta" =>$armarRespuesta,
-                        "puntaje" =>$puntaje[$i],
+                        "puntaje" =>$puntajeRespuesta[0],
                     );
                     array_push($arraypreguntas, $respuestaArray);
+                }else{
+                    echo ("NO existe pregunta para la iteracion: ".$contador);
                 }
-                $jsonPreguntas=(json_encode($arraypreguntas));
-
-            $validator = Validator::make($request->all(), $rules, $messages);
+            }
+            $jsonPreguntas=(json_encode($arraypreguntas)); print_r($jsonPreguntas);
             /*------------- (id) tabla concentracions ------------*/
             $registroTablaJuegoVideo= juegoVideo::count(); $id=$registroTablaJuegoVideo+1;
             /*--------------------- usuario id  -------------------*/
             $usuario_id=auth()->user()->id;
             /*------------------ almacenar imagen del juego ------------------*/
-
-            $formato = array('.jpg', '.png');//extenciones validas
-            $imagen_juego = ($_FILES['imagen_juego']['name']);//Nombre de la imagen
-            $extencion = substr($imagen_juego, strrpos($imagen_juego, '.'));//Extencion de la imagen 
-            if(!in_array($extencion, $formato)) {
-            $data['documento_general']='El tipo de archivo no esta permitido.';
-            }else {
-            $ruta="./../storage/img/portada_juegos/".$_FILES['imagen_juego']['name'];
-            $nombreArchivo = $_FILES['imagen_juego']['name'];
-            move_uploaded_file($_FILES['imagen_juego']['tmp_name'], $ruta);
-            echo "Se movio el archivo";
-            }
+            $nombreImagenJuego = "imagen_juego";
+            $rutaPortadaJuego = "./../storage/img/portada_juegos/";
+            $imagen_juego = $this->AlmacenarArchivos($nombreImagenJuego, $rutaPortadaJuego);
             /*------------------ almacenar video ------------------*/
-            $formato = array('.mp4', '.mp3');//extenciones validas
-                $nombre_video = ($_FILES['cancion']['name']);//Nombre de la imagen
-                $extencion = substr($nombre_video, strrpos($nombre_video, '.'));//Extencion de la imagen 
-                if(!in_array($extencion, $formato)) {
-                    $data['documento_general']='El tipo de archivo no esta permitido.';
-                }else {
-                    $ruta="./../storage/videos/tecnica_concentracion/".$_FILES['cancion']['name'];
-                    $nombreArchivo = $_FILES['cancion']['name'];
-                    move_uploaded_file($_FILES['cancion']['tmp_name'], $ruta);
-                    echo "Se movio el archivo";
-                }
-            
+            $cacionJuego = "cancion";
+            $rutaCancionJuego = "./../storage/videos/tecnica_concentracion/";
+            $nombre_video = $this->AlmacenarArchivos($cacionJuego, $rutaCancionJuego);
             /*--------------- almacenar en la tabla --------------*/
-            $juegoVideo     = new JuegoVideo ;
-            $juegoVideo->titulo = e($request->input('titulo'));
-            $juegoVideo->imagen = $imagen_juego;
-            $juegoVideo->descripcion = e($request->input('descripcion'));
-            $juegoVideo->nivel = e($request->input('nivel'));
-            $juegoVideo->puntaje = e($request->input('puntaje'));
-            $juegoVideo->tiempo = e($request->input('tiempo'));
-            $juegoVideo->archivo_id = $nombre_video;
-            $juegoVideo->preguntas = $jsonPreguntas;
-            $juegoVideo->usuario_id = $usuario_id;
-            $juegoVideo->fecha_inicio = e($request->input('fecha_inicio'));
-            $juegoVideo->fecha_fin = e($request->input('fecha_fin'));
-            $juegoVideo->estado=1;
-            if($juegoVideo->save()):
-                return back()->withErrors($validator)->with('message','El juego se almacenado exitosamente')->with('typealert', 'success');
-            endif;
+            if($imagen_juego != "" && $nombre_video != ""){
+                $juegoVideo     = new JuegoVideo ;
+                $juegoVideo->titulo = e($request->input('titulo'));
+                $juegoVideo->imagen = $imagen_juego;
+                $juegoVideo->descripcion = e($request->input('descripcion'));
+                $juegoVideo->nivel = e($request->input('nivel'));
+                $juegoVideo->puntaje = e($request->input('puntaje'));
+                $juegoVideo->tiempo = e($request->input('tiempo'));
+                $juegoVideo->archivo_id = $nombre_video;
+                $juegoVideo->preguntas = $jsonPreguntas;
+                $juegoVideo->usuario_id = $usuario_id;
+                $juegoVideo->anio_escolaridad = e($request->input('anio_escolaridad'));
+                $juegoVideo->escolaridad_paralelo = e($request->input('escolaridad_paralelo'));
+                $juegoVideo->fecha_inicio = e($request->input('fecha_inicio'));
+                $juegoVideo->fecha_fin = e($request->input('fecha_fin'));
+                $juegoVideo->estado=1;
+                if($juegoVideo->save()):
+                    return back()->withErrors($validator)->with('message','El juego se almacenado exitosamente')->with('typealert', 'success');
+                endif;    
+            }else{
+                return back()->withErrors($validator)->with('message','El juego no se almacenado, debido a que no se guardo los archivos de portada o video de juego.')->with('typealert', 'danger');
+            }
         endif;     
     }
 
@@ -242,7 +208,7 @@ class TecConcentracionController extends Controller
         }else{
             echo "es necesario Seleccionar una cancion";
         }
-       
+
         /*------------------- json artistas ------------------*/
         $artistasCantante    =   json_encode($_POST["artistas"]); var_dump($artistasCantante);
         /*------------------- json palabras ------------------*/
@@ -267,6 +233,21 @@ class TecConcentracionController extends Controller
         return redirect()->route('listar_tec_concentracion');
     }
 
+    public function AlmacenarArchivos ($nombreArchivoHtml, $rutaArchivoStorage)
+    {
+        $formato = array('.jpg', '.png', '.jpeg', '.JPG', '.PNG', '.JPEG','.mp4', '.mp3');//extenciones validas
+            $imagen_juego = ($_FILES["$nombreArchivoHtml"]['name']);//Nombre de la imagen
+            $extencion = substr($imagen_juego, strrpos($imagen_juego, '.'));//Extencion de la imagen 
+            if(!in_array($extencion, $formato)) {
+                $data['documento_general']='El tipo de archivo no esta permitido.';
+                return false;
+            }else {
+                $ruta=$rutaArchivoStorage.$_FILES["$nombreArchivoHtml"]['name'];
+                $nombreArchivo = $_FILES["$nombreArchivoHtml"]['name'];
+                move_uploaded_file($_FILES["$nombreArchivoHtml"]['tmp_name'], $ruta);
+                return ($nombreArchivo);
+            }
+        }
     /**
      * Remove the specified resource from storage.
      *
@@ -294,11 +275,40 @@ class TecConcentracionController extends Controller
     }
 
     public function tecnicaConcentracion(){
-        $juegoVideo = DB::table('juego_videos')
-        ->join('users', 'users.id', '=' ,'juego_videos.usuario_id')
-        ->select('juego_videos.id','juego_videos.titulo','juego_videos.descripcion','juego_videos.nivel','juego_videos.puntaje','juego_videos.estado as estadoTEC','users.estado','users.name')
+        /*--------------------- Datos alumno  ---------------------*/
+        $usuario_id=auth()->user()->id;
+        $InformacionEstudiante = DB::table('personas')
+        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')
+        ->select('alumnos.codigo_rude','alumnos.anio_escolaridad','alumnos.paralelo')
         ->get();
-        return view('tec_concentracion.listar_juegos_concentracion')->with(compact('juegoVideo'));
+        $DatosAlumno=$InformacionEstudiante[0];
+        $RudeEstudiante = intval($DatosAlumno->codigo_rude);
+        $AnioEscolaridadEstudiante = $DatosAlumno->anio_escolaridad;
+        $ParaleloEstudiante = $DatosAlumno->paralelo;
+        // echo($RudeEstudiante.$AnioEscolaridadEstudiante.$ParaleloEstudiante);
+        /*---------------------------------------------------------*/
+        /*--------    Listar Tecnicas de concentracion     --------*/
+        $juegoVideo = DB::table('juego_videos')
+        ->where('anio_escolaridad', '=', $AnioEscolaridadEstudiante)
+        ->where('escolaridad_paralelo', '=', $ParaleloEstudiante)
+        ->get();
+        // print_r($juegoVideo);
+        /*---------------------------------------------------------*/
+        return view('tec_concentracion.listar_juegos_concentracion')->with(compact('juegoVideo','RudeEstudiante','AnioEscolaridadEstudiante','ParaleloEstudiante'));
+    }
+    public function game($idTecnicaConcentracion){
+        /*------------------------------------------ Datos alumno ------------------------------------------*/
+        $usuario_id=auth()->user()->id;
+        $InformacionEstudiante = DB::table('personas')
+        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')->select('alumnos.codigo_rude')->get();
+        $DatosAlumno=$InformacionEstudiante[0];
+        $numero_rude = intval($DatosAlumno->codigo_rude);
+        /*--------------------------------------------------------------------------------------------------*/
+        /*------------------------------------------------ Obtener tecnica de la cadena  ------------------------------------------------*/
+        $InformacionJuego = DB::table('juego_videos')->where('id', '=' ,$idTecnicaConcentracion)->get();
+        $DatosJuego = $InformacionJuego[0];
+        /*-------------------------------------------------------------------------------------------------------------------------------*/
+        return view('tec_concentracion.juego_video')->with(compact('DatosJuego','numero_rude'));
     }
     public function gameVideo(){
         return view('tec_concentracion.juego_video');

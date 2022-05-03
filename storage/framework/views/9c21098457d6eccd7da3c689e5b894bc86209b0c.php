@@ -4,12 +4,12 @@
     <!--  Iniciar sesion -->
     <!-- ============================================================== -->
     <section id="wrapper" class="login-register login-sidebar"
-        style="background-image:url(<?php echo e(('assets/images/background/fondo.jpg')); ?>);">
+        style="background-image:url(<?php echo e(('assets/images/background/gravedad.jpg'), false); ?>);">
         <div class="login-box card">
             <div class="card-body">
             <?php echo Form::open(['url' => '/login_user']); ?>
 
-                    <img src="<?php echo e(('assets/logo/logo_aprendizaje.jpeg')); ?>" id="logo_sistema" alt="Home" /></a>
+                    <img src="<?php echo e(('assets/logo/logo_aprendizaje.jpeg'), false); ?>" id="logo_sistema" alt="Home" /></a>
 
                     <div class="form-group mt-5">
                         <div class="col-xs-12">
@@ -35,19 +35,19 @@
                     </div>
                     <div class="form-group mb-0">
                         <div class="col-sm-12 text-center">
-                            <p>¿No tienes una cuenta? <a href="<?php echo e(url('/registro_usuario')); ?>"
+                            <p>¿No tienes una cuenta? <a href="<?php echo e(url('/registro_usuario'), false); ?>"
                                     class="text-primary ml-1"><b>Regístrarse</b></a></p>
                         </div>
                          <!-- Seccino de errrores-->
                         <?php if(Session::has('message')): ?>
                             <div class="container">
-                                <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                                    <?php echo e(Session::get('message')); ?>
+                                <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                                    <?php echo e(Session::get('message'), false); ?>
 
                                     <?php if($errors->any()): ?>
                                         <ul>
                                             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li><?php echo e($error); ?></li>
+                                                <li><?php echo e($error, false); ?></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                     <?php endif; ?>

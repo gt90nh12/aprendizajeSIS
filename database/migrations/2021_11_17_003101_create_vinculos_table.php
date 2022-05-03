@@ -18,6 +18,8 @@ class CreateVinculosTable extends Migration
             $table->text('titulo');
             $table->text('imagen');
             $table->text('descripcion');
+            $table->text('anio_escolaridad');
+            $table->text('escolaridad_paralelo');
             $table->text('nivel');
             $table->text('puntaje');
             $table->time('tiempo');

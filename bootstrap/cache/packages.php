@@ -1,4 +1,15 @@
 <?php return array (
+  'encore/laravel-admin' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Encore\\Admin\\AdminServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Admin' => 'Encore\\Admin\\Facades\\Admin',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
@@ -33,6 +44,13 @@
       'FirebaseMessaging' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseMessaging',
       'FirebaseRemoteConfig' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseRemoteConfig',
       'FirebaseStorage' => 'Kreait\\Laravel\\Firebase\\Facades\\FirebaseStorage',
+    ),
+  ),
+  'laravel-admin-ext/log-viewer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Encore\\Admin\\LogViewer\\LogViewerServiceProvider',
     ),
   ),
   'laravel/tinker' => 

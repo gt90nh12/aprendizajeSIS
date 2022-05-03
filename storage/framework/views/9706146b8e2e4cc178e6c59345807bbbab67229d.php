@@ -30,23 +30,23 @@
                             <ul class="icheck-list">
                                 <li>
                                     <input tabindex="7" type="radio" class="check" id="minimal-radio-1"
-                                        name="rol" value="1">
-                                    <label for="minimal-radio-1">Director</label>
+                                        name="rol" value="2">
+                                    <label for="minimal-radio-2">Director</label>
                                 </li>
                                 <li>
                                     <input tabindex="8" type="radio" class="check" id="minimal-radio-2"
                                         name="rol" value="2" checked>
-                                    <label for="minimal-radio-2">Profesor</label>
+                                    <label for="minimal-radio-3">Profesor</label>
                                 </li>
                                 <li>
-                                    <input type="radio" class="check" id="minimal-radio-disabled" name="rol" value="3">
+                                    <input type="radio" class="check" id="minimal-radio-disabled" name="rol" value="4">
                                     <label for="minimal-radio-disabled">Estudiante</label>
                                 </li>
-                                <li>
-                                    <input type="radio" class="check" id="minimal-radio-disabled-checked" checked
+<!--                                 <li>
+                                    <input type="radio" class="check" id="minimal-radio-disabled-checked" value="5" checked
                                         disabled>
                                     <label for="minimal-radio-disabled-checked">Padre de &amp; familia</label>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             <option value="" class="placeholderselect" disabled selected>Seleccione una numero de CI.
                             </option>
                             <?php $__currentLoopData = $personas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $persona): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value=<?php echo e($persona->ci); ?>><?php echo e($persona->ci); ?></option>
+                            <option value=<?php echo e($persona->ci, false); ?>><?php echo e($persona->ci, false); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
@@ -120,14 +120,14 @@
     <div class="form-actions">
         <div class="card-body">
             <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>
-            <a href="<?php echo e(route('listar_usuario')); ?>" class="btn btn-dark">Cancelar</a>
+            <a href="<?php echo e(route('listar_usuario'), false); ?>" class="btn btn-dark">Cancelar</a>
         </div>
     </div>
 </div>
 
 <?php $__env->startSection('archivos_script_form'); ?>
 <!-- jQuery file upload -->
-<script src='<?php echo e(('assets/plugins/dropify/dist/js/dropify.min.js')); ?>'></script>
+<script src='<?php echo e(('assets/plugins/dropify/dist/js/dropify.min.js'), false); ?>'></script>
 <script>
     $(document).ready(function () {
         $('.dropify').dropify({

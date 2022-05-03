@@ -9,24 +9,24 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(('assets/images/cabecera.png ')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(('assets/images/cabecera.png '), false); ?>">
     <title>Aprendizaje</title>
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo e(('assets/plugins/bootstrap/css/bootstrap.min.css ')); ?>" rel="stylesheet">
+    <link href="<?php echo e(('assets/plugins/bootstrap/css/bootstrap.min.css '), false); ?>" rel="stylesheet">
     <?php $__env->startSection('archivos_style_form'); ?>
     <?php echo $__env->yieldSection(); ?>
     <!-- image CSS -->
-    <link rel="stylesheet" href="<?php echo e(('assets/plugins/dropify/dist/css/dropify.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(('assets/plugins/dropify/dist/css/dropify.min.css'), false); ?>">
     <!-- checked - radio CSS -->
-    <link href="<?php echo e(('assets/plugins/icheck/skins/all.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(('assets/plugins/icheck/skins/all.css'), false); ?>" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?php echo e(('assets/css/style.css ')); ?>" rel="stylesheet">
+    <link href="<?php echo e(('assets/css/style.css '), false); ?>" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="<?php echo e(('assets/css/colors/blue.css ')); ?>" id="theme" rel="stylesheet">
+    <link href="<?php echo e(('assets/css/colors/blue.css '), false); ?>" id="theme" rel="stylesheet">
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="<?php echo e(('assets/plugins/jquery/jquery.min.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/jquery/jquery.min.js'), false); ?>"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,7 +34,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js ') }}"></script>
 <![endif]-->
 <!---- Estilos_personalizados ---->
-<link href="<?php echo e(('css/estilos_personalizados.css')); ?>" id="theme" rel="stylesheet">
+<link href="<?php echo e(('css/estilos_personalizados.css'), false); ?>" id="theme" rel="stylesheet">
 <style type="text/css">
     .espacio{
         margin-right: 10px;
@@ -79,17 +79,16 @@
                             <!-- Logo icon --><b>
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                 <!-- Dark Logo icon -->
-                                <img src="<?php echo e(('assets/images/logo-icon.png ')); ?>" alt="homepage" class="dark-logo" />
+                                <img src="<?php echo e(('assets/images/logo-icon.png '), false); ?>" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="<?php echo e(('assets/images/logo-light-icon.png ')); ?>" alt="homepage" class="light-logo" />
+                                <img src="<?php echo e(('assets/images/logo-light-icon.png '), false); ?>" alt="homepage" class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text --><span>
                                 <!-- dark Logo text -->
-                                <img src="<?php echo e(('assets/images/logo-text.png ')); ?>" alt="homepage" class="dark-logo" />
+                                <!-- <img src="<?php echo e(('assets/images/logo-textDOS.png '), false); ?>" alt="homepage" class="dark-logo" /> -->
                                 <!-- Light Logo text -->
-                                <img src="<?php echo e(('assets/images/logo-light-text.png ')); ?>" class="light-logo"
-                                alt="homepage" /></span> </a>
+                                <!-- <img src="<?php echo e(('assets/images/logo-light-textDOS.png '), false); ?>" class="light-logo" alt="homepage" /></span> </a> -->
                             </div>
                             <!-- ============================================================== -->
                             <!-- End Logo -->
@@ -121,122 +120,7 @@
                                                 <!-- ============================================================== -->
                                                 <!-- Messages -->
                                                 <!-- ============================================================== -->
-                                                <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark"
-                                                    href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                                    class="mdi mdi-view-grid"></i></a>
-                                                    <div class="dropdown-menu animated bounceInDown">
-                                                        <ul class="mega-dropdown-menu row">
-                                                            <li class="col-lg-3 col-xlg-2 mb-4">
-                                                                <h4 class="mb-3">CAROUSEL</h4>
-                                                                <!-- CAROUSEL -->
-                                                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                                                    <div class="carousel-inner" role="listbox">
-                                                                        <div class="carousel-item active">
-                                                                            <div class="container"> <img class="d-block img-fluid"
-                                                                                src="<?php echo e(('assets/images/big/img1.jpg ')); ?>" alt="First slide"></div>
-                                                                            </div>
-                                                                            <div class="carousel-item">
-                                                                                <div class="container"><img class="d-block img-fluid"
-                                                                                    src="<?php echo e(('assets/images/big/img2.jpg ')); ?>" alt="Second slide"></div>
-                                                                                </div>
-                                                                                <div class="carousel-item">
-                                                                                    <div class="container"><img class="d-block img-fluid"
-                                                                                        src="<?php echo e(('assets/images/big/img3.jpg ')); ?>" alt="Third slide"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                                                                data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-                                                                                class="sr-only">Previous</span> </a>
-                                                                                <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                                                                data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-                                                                                class="sr-only">Next</span> </a>
-                                                                            </div>
-                                                                            <!-- End CAROUSEL -->
-                                                                        </li>
-                                                                        <li class="col-lg-3 mb-4">
-                                                                            <h4 class="mb-3">ACCORDION</h4>
-                                                                            <!-- Accordian -->
-                                                                            <div id="accordion" class="nav-accordion" role="tablist" aria-multiselectable="true">
-                                                                                <div class="card">
-                                                                                    <div class="card-header" role="tab" id="headingOne">
-                                                                                        <h5 class="mb-0">
-                                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                                                                            aria-expanded="true" aria-controls="collapseOne">
-                                                                                            Collapsible Group Item #1
-                                                                                        </a>
-                                                                                    </h5>
-                                                                                </div>
-                                                                                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                                                                    <div class="card-body"> Anim pariatur cliche reprehenderit, enim
-                                                                                    eiusmod high. </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="card">
-                                                                                <div class="card-header" role="tab" id="headingTwo">
-                                                                                    <h5 class="mb-0">
-                                                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                                                                        href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                                        Collapsible Group Item #2
-                                                                                    </a>
-                                                                                </h5>
-                                                                            </div>
-                                                                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                                                <div class="card-body"> Anim pariatur cliche reprehenderit, enim
-                                                                                eiusmod high life accusamus terry richardson ad squid. </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="card">
-                                                                            <div class="card-header" role="tab" id="headingThree">
-                                                                                <h5 class="mb-0">
-                                                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                                                                    href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                                    Collapsible Group Item #3
-                                                                                </a>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                                            <div class="card-body"> Anim pariatur cliche reprehenderit, enim
-                                                                            eiusmod high life accusamus terry richardson ad squid. </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="col-lg-3  mb-4">
-                                                                <h4 class="mb-3">CONTACT US</h4>
-                                                                <!-- Contact -->
-                                                                <form>
-                                                                    <div class="form-group">
-                                                                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <textarea class="form-control" id="exampleTextarea" rows="3"
-                                                                        placeholder="Message"></textarea>
-                                                                    </div>
-                                                                    <button type="submit" class="btn btn-info">Submit</button>
-                                                                </form>
-                                                            </li>
-                                                            <li class="col-lg-3 col-xlg-4 mb-4">
-                                                                <h4 class="mb-3">List style</h4>
-                                                                <!-- List style -->
-                                                                <ul class="list-style-none">
-                                                                    <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i>
-                                                                    You can give link</a></li>
-                                                                    <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i>
-                                                                    Give link</a></li>
-                                                                    <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i>
-                                                                    Another Give link</a></li>
-                                                                    <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i>
-                                                                    Forth link</a></li>
-                                                                    <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i>
-                                                                    Another fifth link</a></li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
+                                                
                                                 <!-- ============================================================== -->
                                                 <!-- End Messages -->
                                                 <!-- ============================================================== -->
@@ -245,11 +129,11 @@
                                             <!-- User profile and search -->
                                             <!-- ============================================================== -->
                                             <ul class="navbar-nav my-lg-0">
-                                                <li class="nav-item hidden-sm-down">
+                                               <!--  <li class="nav-item hidden-sm-down">
                                                     <form class="app-search">
                                                         <input type="text" class="form-control" placeholder="Buscar"> <a class="srh-btn"><i
                                                             class="ti-search"></i></a> </form>
-                                                        </li>
+                                                        </li> -->
 
                                                         <li class="nav-item dropdown">
                                                             <button class="right-side-toggle waves-effect waves-light btn-info btn-circle btn-sm float-right ml-2"><i
@@ -272,19 +156,19 @@
                                                     <div class="user-profile">
                                                         <!-- User profile image -->
                                                         <div class="profile-img"> <img
-                                                            src="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e(auth()->user()->direccion_imagen); ?>"
+                                                            src="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e(auth()->user()->direccion_imagen, false); ?>"
                                                             alt="user" /></div>
                                                             <!-- User profile text-->
                                                             <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown"
                                                                 role="button" aria-haspopup="true" aria-expanded="true">
-                                                                <?php echo e(auth()->user()->name); ?>
+                                                                <?php echo e(auth()->user()->name, false); ?>
 
                                                                 <span class="caret"></span></a>
                                                                 <div class="dropdown-menu animated flipInY">
                                                                     <a href="#" class="dropdown-item"><i class="ti-user"></i> Mi perfil</a>
                                                                     <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i
                                                                         class="ti-settings"></i> Configuración</a>
-                                                                        <div class="dropdown-divider"></div> <a href="<?php echo e(url('/cerrar_session')); ?>" class="dropdown-item"><i
+                                                                        <div class="dropdown-divider"></div> <a href="<?php echo e(url('/cerrar_session'), false); ?>" class="dropdown-item"><i
                                                                             class="fa fa-power-off"></i> Cerrar sesión</a>
                                                                         </div>
                                                                     </div>
@@ -364,8 +248,8 @@
                             <a class="has-arrow" href="#" aria-expanded="false"><i class="ti-book"></i><span
                                 class="hide-menu">Test general</span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="<?php echo e(url('/crear_prueba')); ?>">Crear</a></li>
-                                    <li><a href="<?php echo e(url('/listar_prueba')); ?>">Listar</a></li>
+                                    <li><a href="<?php echo e(url('/crear_prueba'), false); ?>">Crear</a></li>
+                                    <li><a href="<?php echo e(url('/listar_prueba'), false); ?>">Listar</a></li>
                                     <!-- <li><a href="index3.html">Estudiantes</a></li> -->
                                 </ul>
                             </li>
@@ -377,14 +261,14 @@
                                 <ul aria-expanded="false" class="collapse">
                                     <li><a href="#" class="has-arrow">Cadena </a>
                                         <ul aria-expanded="false" class="collapse">
-                                            <li><a href="<?php echo e(url('/listar_tecnicas')); ?>">Listar</a></li>
-                                            <li><a href="<?php echo e(url('crear_tec_cadena')); ?>">Crear</a></li>
+                                            <li><a href="<?php echo e(url('/listar_tec_cadena'), false); ?>">Listar</a></li>
+                                            <li><a href="<?php echo e(url('crear_tec_cadena'), false); ?>">Crear</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#" class="has-arrow">Visualizacion</a>
                                         <ul aria-expanded="false" class="collapse">
-                                            <li><a href="<?php echo e(url('listar_tec_vinculo')); ?>">Listar</a></li>
-                                            <li><a href="<?php echo e(url('crear_tec_vinculo')); ?>">Crear</a></li>
+                                            <li><a href="<?php echo e(url('listar_tec_vinculo'), false); ?>">Listar</a></li>
+                                            <li><a href="<?php echo e(url('crear_tec_vinculo'), false); ?>">Crear</a></li>
                                         </ul>
                                     </li>
                                    <!--  <li><a href="form-addons.html">Visualizacion</a></li> -->
@@ -396,8 +280,8 @@
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="#" class="has-arrow">Videos de concentración</a>
                                             <ul aria-expanded="false" class="collapse">
-                                                <li><a href="<?php echo e(url('/listar_tec_concentracion')); ?>">Listar</a></li>
-                                                <li><a href="<?php echo e(url('/crear_tec_concentracion')); ?>">Crear</a></li>
+                                                <li><a href="<?php echo e(url('/listar_tec_concentracion'), false); ?>">Listar</a></li>
+                                                <li><a href="<?php echo e(url('/crear_tec_concentracion'), false); ?>">Crear</a></li>
                                             </ul>
                                         </li>
 
@@ -409,9 +293,9 @@
                                         <ul aria-expanded="false" class="collapse">
                                             <li><a href="#" class="has-arrow">Juego emparejar</a>
                                                 <ul aria-expanded="false" class="collapse">
-                                                    <!-- <li><a href="<?php echo e(url('/listar_tec_cadena')); ?>">Listar</a></li> -->
-                                                    <li><a href="<?php echo e(url('crear_tec_calculo')); ?>">Crear</a></li>
-                                                    <li><a href="<?php echo e(url('listar_tec_calculo')); ?>">Listar</a></li>
+                                                    <!-- <li><a href="<?php echo e(url('/listar_tec_cadena'), false); ?>">Listar</a></li> -->
+                                                    <li><a href="<?php echo e(url('crear_tec_calculo'), false); ?>">Crear</a></li>
+                                                    <li><a href="<?php echo e(url('listar_tec_calculo'), false); ?>">Listar</a></li>
                                                 </ul>
                                             </li>
                             <!-- <li><a href="form-layout.html">Categorizacion</a></li>
@@ -424,10 +308,10 @@
                             <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span
                                 class="hide-menu">Usuario</span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="<?php echo e(url('/listar_usuario')); ?>">Listar</a></li>
-                                    <li><a href="<?php echo e(url('/registro_usuario_admin')); ?>">Crear</a></li>
+                                    <li><a href="<?php echo e(url('/listar_usuario'), false); ?>">Listar</a></li>
+                                    <li><a href="<?php echo e(url('/registro_usuario_admin'), false); ?>">Crear</a></li>
                                     <li><a href="#">Reporte</a></li>
-                                    <li><a href="<?php echo e(url('/roles_usuario')); ?>">Roles</a></li>
+                                    <li><a href="<?php echo e(url('/roles_usuario'), false); ?>">Roles</a></li>
 
                                 </ul>
                             </li>
@@ -437,35 +321,35 @@
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="#" class="has-arrow">Colegio </a>
                                             <ul aria-expanded="false" class="collapse">
-                                                <li><a href="<?php echo e(url('/listar_escuela')); ?>">Listar</a></li>
-                                                <li><a href="<?php echo e(url('/crear_escuela')); ?>">Crear</a></li>
+                                                <li><a href="<?php echo e(url('/listar_escuela'), false); ?>">Listar</a></li>
+                                                <li><a href="<?php echo e(url('/crear_escuela'), false); ?>">Crear</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#" class="has-arrow">Profesor </a>
                                             <ul aria-expanded="false" class="collapse">
-                                                <li><a href="<?php echo e(url('/listar_docente')); ?>">Listar</a></li>
-                                                <li><a href="<?php echo e(url('/crear_docente')); ?>">Crear</a></li>
+                                                <li><a href="<?php echo e(url('/listar_docente'), false); ?>">Listar</a></li>
+                                                <li><a href="<?php echo e(url('/crear_docente'), false); ?>">Crear</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#" class="has-arrow">Persona </a>
                                             <ul aria-expanded="false" class="collapse">
-                                                <li><a href="<?php echo e(url('/listar_persona')); ?>">Listar</a></li>
-                                                <li><a href="<?php echo e(url('/almacenar_persona')); ?>">Crear</a></li>
+                                                <li><a href="<?php echo e(url('/listar_persona'), false); ?>">Listar</a></li>
+                                                <li><a href="<?php echo e(url('/almacenar_persona'), false); ?>">Crear</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#" class="has-arrow">Alumno </a>
                                             <ul aria-expanded="false" class="collapse">
-                                                <li><a href="<?php echo e(url('/listar_alumno')); ?>">Listar</a></li>
-                                                <li><a href="<?php echo e(url('/crear_alumno')); ?>">Crear</a></li>
+                                                <li><a href="<?php echo e(url('/listar_alumno'), false); ?>">Listar</a></li>
+                                                <li><a href="<?php echo e(url('/crear_alumno'), false); ?>">Crear</a></li>
                                             </ul>
                                         </li>
 
                                     </ul>
                                 </li>
-                    <!-- <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Sample Pages</span></a>
+                    <!--<li>
+                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Base de datos</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="starter-kit.html">Starter Kit</a></li>
+                                <li><a href="starter-kit.html">Copia de seguridad</a></li>
                                 <li><a href="pages-blank.html">Blank page</a></li>
                                 <li><a href="#" class="has-arrow">Authentication <span class="label label-rounded label-success">6</span></a>
                                     <ul aria-expanded="false" class="collapse">
@@ -498,7 +382,7 @@
                                         <li><a href="pages-error-500.html">500</a></li>
                                         <li><a href="pages-error-503.html">503</a></li>
                                     </ul>
-                                </li>
+                                </li> 
                             </ul>
                         </li>
                         <li>
@@ -533,13 +417,13 @@
                                 <li><a href="map-google.html">Google Maps</a></li>
                                 <li><a href="map-vector.html">Vector Maps</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
+                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Mantenimiento</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">item 1.1</a></li>
-                                <li><a href="#">item 1.2</a></li>
-                                <li>
+                                <li><a href="<?php echo e(url('/log_user'), false); ?>">Log</a></li>
+                                <li><a href="<?php echo e(url('/copia_seguridad'), false); ?>">Base de datos</a></li>
+                                <!-- <li>
                                     <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="#">item 1.3.1</a></li>
@@ -548,9 +432,9 @@
                                         <li><a href="#">item 1.3.4</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">item 1.4</a></li>
+                                <li><a href="#">item 1.4</a></li> -->
                             </ul>
-                        </li> -->
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -608,18 +492,18 @@
                 <!-- .right-sidebar -->
                 <div class="right-sidebar">
                     <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span>
+                        <div class="rpanel-title"> Panel de servicio <span><i class="ti-close right-side-toggle"></i></span>
                         </div>
                         <div class="r-panel-body">
                             <ul id="themecolors" class="mt-3">
-                                <li><b>With Light sidebar</b></li>
+                                <li><b>Barra superior</b></li>
                                 <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
                                 <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
                                 <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
                                 <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
                                 <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
                                 <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li class="d-block mt-4"><b>With Dark sidebar</b></li>
+                                <li class="d-block mt-4"><b>Barra lateral</b></li>
                                 <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a>
                                 </li>
                                 <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
@@ -630,49 +514,7 @@
                                 <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a>
                                 </li>
                             </ul>
-                            <ul class="mt-3 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/1.jpg ')); ?>"
-                                        alt="user-img" class="img-circle"> <span>Varun Dhavan <small
-                                            class="text-success">online</small></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/2.jpg ')); ?>"
-                                                alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small
-                                                    class="text-warning">Away</small></span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/3.jpg ')); ?>"
-                                                        alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small
-                                                            class="text-danger">Busy</small></span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/4.jpg ')); ?>"
-                                                                alt="user-img" class="img-circle"> <span>Arijit Sinh <small
-                                                                    class="text-muted">Offline</small></span></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/5.jpg ')); ?>"
-                                                                        alt="user-img" class="img-circle"> <span>Govinda Star <small
-                                                                            class="text-success">online</small></span></a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/6.jpg ')); ?>"
-                                                                                alt="user-img" class="img-circle"> <span>John Abraham<small
-                                                                                    class="text-success">online</small></span></a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/7.jpg ')); ?>"
-                                                                                        alt="user-img" class="img-circle"> <span>Hritik Roshan<small
-                                                                                            class="text-success">online</small></span></a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="javascript:void(0)"><img src="<?php echo e(('assets/images/users/8.jpg ')); ?>"
-                                                                                                alt="user-img" class="img-circle"> <span>Pwandeep rajan <small
-                                                                                                    class="text-success">online</small></span></a>
-                                                                                                </li>
-                                                                                            </ul>
+                           
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -686,7 +528,7 @@
                                                                             <!-- ============================================================== -->
                                                                             <!-- footer -->
                                                                             <!-- ============================================================== -->
-                                                                            <footer class="footer"> © 2020 Sistema de Aprendizaje </footer>
+                                                                            <footer class="footer"> © 2022 Sistema de Aprendizaje </footer>
                                                                             <!-- ============================================================== -->
                                                                             <!-- End footer -->
                                                                             <!-- ============================================================== -->
@@ -701,31 +543,31 @@
                                                                     <!-- ============================================================== -->
                                                                     <!-- All Jquery -->
                                                                     <!-- ============================================================== -->
-                                                                    <script src="<?php echo e(('assets/plugins/jquery/jquery.min.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/jquery/jquery.min.js '), false); ?>"></script>
                                                                     <!-- Bootstrap tether Core JavaScript -->
-                                                                    <script src="<?php echo e(('assets/plugins/bootstrap/js/popper.min.js ')); ?>"></script>
-                                                                    <script src="<?php echo e(('assets/plugins/bootstrap/js/bootstrap.min.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/bootstrap/js/popper.min.js '), false); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/bootstrap/js/bootstrap.min.js '), false); ?>"></script>
                                                                     <link rel="stylesheet" type="text/css"
-                                                                    href="<?php echo e(('assets/plugins/datatables/media/css/dataTables.bootstrap4.css')); ?>">
+                                                                    href="<?php echo e(('assets/plugins/datatables/media/css/dataTables.bootstrap4.css'), false); ?>">
                                                                     <!-- slimscrollbar scrollbar JavaScript -->
-                                                                    <script src="<?php echo e(('js/jquery.slimscroll.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('js/jquery.slimscroll.js '), false); ?>"></script>
                                                                     <!--Wave Effects -->
-                                                                    <script src="<?php echo e(('js/waves.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('js/waves.js '), false); ?>"></script>
                                                                     <!--Menu sidebar -->
-                                                                    <script src="<?php echo e(('js/sidebarmenu.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('js/sidebarmenu.js '), false); ?>"></script>
                                                                     <!--stickey kit -->
-                                                                    <script src="<?php echo e(('assets/plugins/sticky-kit-master/dist/sticky-kit.min.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/sticky-kit-master/dist/sticky-kit.min.js '), false); ?>"></script>
                                                                     <!--************** Custom JavaScript  validacion de formulario de registro **************-->
-                                                                    <script src="<?php echo e(('js/custom.min.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('js/custom.min.js '), false); ?>"></script>
                                                                     <!-- checked - radio -->
-                                                                    <script src="<?php echo e(('assets/plugins/icheck/icheck.min.js')); ?>"></script>
-                                                                    <script src="<?php echo e(('assets/plugins/icheck/icheck.init.js')); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/icheck/icheck.min.js'), false); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/icheck/icheck.init.js'), false); ?>"></script>
                                                                     
                                                                     <!--*************************************************************************************-->
                                                                     <!-- ============================================================== -->
                                                                     <!-- Style switcher -->
                                                                     <!-- ============================================================== -->
-                                                                    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js ')); ?>"></script>
+                                                                    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js '), false); ?>"></script>
 
                                                                     <?php $__env->startSection('archivos_script_form'); ?>
                                                                     <?php echo $__env->yieldSection(); ?>

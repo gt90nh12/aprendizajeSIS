@@ -17,6 +17,8 @@ class CreateTecConcentracionsTable extends Migration
             $table->bigIncrements('id');
             $table->char('titulo',55);
             $table->text('descripcion');
+            $table->text('anio_escolaridad');
+            $table->text('escolaridad_paralelo');
             $table->text('nivel');
             $table->integer('puntaje');
             $table->time('tiempo');

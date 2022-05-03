@@ -18,6 +18,8 @@ class CreateJuegoVideosTable extends Migration
             $table->char('titulo',55);
             $table->text('imagen');
             $table->text('descripcion');
+            $table->text('anio_escolaridad');
+            $table->text('escolaridad_paralelo');
             $table->text('nivel');
             $table->integer('puntaje');
             $table->time('tiempo');

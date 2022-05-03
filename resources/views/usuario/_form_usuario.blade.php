@@ -30,23 +30,23 @@
                             <ul class="icheck-list">
                                 <li>
                                     <input tabindex="7" type="radio" class="check" id="minimal-radio-1"
-                                        name="rol" value="1">
-                                    <label for="minimal-radio-1">Director</label>
+                                        name="rol" value="2">
+                                    <label for="minimal-radio-2">Director</label>
                                 </li>
                                 <li>
                                     <input tabindex="8" type="radio" class="check" id="minimal-radio-2"
                                         name="rol" value="2" checked>
-                                    <label for="minimal-radio-2">Profesor</label>
+                                    <label for="minimal-radio-3">Profesor</label>
                                 </li>
                                 <li>
-                                    <input type="radio" class="check" id="minimal-radio-disabled" name="rol" value="3">
+                                    <input type="radio" class="check" id="minimal-radio-disabled" name="rol" value="4">
                                     <label for="minimal-radio-disabled">Estudiante</label>
                                 </li>
-                                <li>
-                                    <input type="radio" class="check" id="minimal-radio-disabled-checked" checked
+<!--                                 <li>
+                                    <input type="radio" class="check" id="minimal-radio-disabled-checked" value="5" checked
                                         disabled>
                                     <label for="minimal-radio-disabled-checked">Padre de &amp; familia</label>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>

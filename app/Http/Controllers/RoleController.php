@@ -55,7 +55,11 @@ class RoleController extends Controller
                 $nombreArchivo = $_FILES['direccion_imagen']['name'];
                 move_uploaded_file($_FILES['direccion_imagen']['tmp_name'], $ruta);
             }
+            $roles=0;$numeroroles=0;
+            $roles = Role::count();
+            $numeroroles = $roles + 1;
             $role = new Role;
+            $role->id = $numeroroles;
             $role->nobre = e($request->input('nombre'));
             $role->descripcion = e($request->input('descripcion'));
             $role->direccion_imagen = $nombreArchivo;

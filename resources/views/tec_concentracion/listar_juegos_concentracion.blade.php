@@ -1,5 +1,5 @@
 <!-- ************** Formulario admin *************** -->
-@extends('connect\ad')
+@extends('connect\alumno')
 @section('titulo_pagina', 'Tecnica de la Concentración')
 @section('descripcion_pagina', 'Formulario listar tecnica de la concentración')
 <!-- *********************************************** -->
@@ -19,20 +19,16 @@
                         <thead>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </tfoot>
@@ -41,12 +37,10 @@
                             @foreach($juegoVideo as $juego)
                                 <tr>
                                     <td>{{ $juego->titulo}}</td>
-                                    <td>{{ $juego->descripcion}}</td>
                                     <td>{{ $juego->nivel}}</td>
                                     <td>{{ $juego->puntaje}}</td>
-                                    <td>{{ $juego->name}}</td>
                                     <td>
-                                    <a href="{{ route('juego_video') }}" class="btn btn-info mdi mdi-cube-outline"> </a>
+                                    <a href="{{ route('juego_video',$juego->id) }}" class="btn btn-info mdi mdi-cube-outline"> </a> 
                                     </td>
                                 </tr>
                             @endforeach

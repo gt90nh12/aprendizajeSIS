@@ -108,7 +108,16 @@
                 <div class="form-group">
                     <h5 class="form_descripcion">Año de escolaridad<span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="anio_escolaridad" class="form-control"  data-validation-required-message="El año de escolaridad es requerida.">
+                        <select name="anio_escolaridad" class="form-control" required="" data-validation-required-message="Seleccione año escolaridad">
+                                                    <option value="" class="placeholderselect" disabled="" selected="">Seleccione año de escolaridad.
+                                                    </option>
+                                                    <option value="PRIMERO">PRIMERO</option>
+                                                    <option value="SEGUNDO">SEGUNDO</option>
+                                                    <option value="TERCERO">TERCERO</option>
+                                                    <option value="CUARTO">CUARTO</option>
+                                                    <option value="QUINTO">QUINTO</option>
+                                                    <option value="SEXTO">SEXTO</option>
+                                                </select>
                     </div>
                 </div>
             </div>
@@ -116,8 +125,14 @@
                 <div class="form-group">
                     <h5 class="form_descripcion">Paralelo<span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text"  name="paralelo" class="form-control" required
-                            data-validation-required-message="El paralelo es requerido">
+                            <select name="paralelo" class="form-control" required="" data-validation-required-message="El paralelo es requerido">
+                                                <option value="" class="placeholderselect" disabled="" selected="">Seleccione paralelo.
+                                                </option>
+                                                <option value="A">Todos</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                            </select>
                     </div>
                 </div>
             </div>
@@ -134,7 +149,7 @@
     <div class="form-actions">
         <div class="card-body">
             <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>
-            <a href="<?php echo e(route('listar_escuela')); ?>" class="btn btn-dark">Cancelar</a>
+            <a href="<?php echo e(route('listar_escuela'), false); ?>" class="btn btn-dark">Cancelar</a>
         </div>
     </div>
 </div>

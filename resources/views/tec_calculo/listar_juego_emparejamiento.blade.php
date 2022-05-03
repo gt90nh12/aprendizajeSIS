@@ -1,5 +1,5 @@
 <!-- ************** Formulario admin *************** -->
-@extends('connect\ad')
+@extends('connect\alumno')
 @section('titulo_pagina', 'Tecnica del calculo')
 @section('descripcion_pagina', 'Formulario listar tecnica del calculo')
 <!-- *********************************************** -->
@@ -19,37 +19,29 @@
                         <thead>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Título</th>
-                                <th>Descripción</th>
                                 <th>Nivel</th>
                                 <th>Puntaje</th>
-                                <th>Profesor</th>
                                 <th>Acción</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @if(!empty($tecCalculo))
-                            @foreach($tecCalculo as $tecnicas)
+                            @if(!empty($juegoInformacion))
+                            @foreach($juegoInformacion as $juego)
                                 <tr>
-                                    <td>{{ $tecnicas->titulo}}</td>
-                                    <td>{{ $tecnicas->descripcion}}</td>
-                                    <td>{{ $tecnicas->nivel}}</td>
-                                    <td>{{ $tecnicas->puntaje}}</td>
-                                    <td>{{ $tecnicas->name}}</td>
+                                    <td>{{ $juego->titulo}}</td>
+                                    <td>{{ $juego->nivel}}</td>
+                                    <td>{{ $juego->puntaje}}</td>
                                     <td>
-                                     <a href="{{ route('juego_emparejamiento') }}" class="btn btn-info mdi mdi-cube-outline"> </a>
-                                  
+                                        <a href="{{ route('juego_emparejamiento',$juego->id) }}" class="btn btn-info mdi mdi-cube-outline"> </a>
                                     </td>
-                                   
                                 </tr>
                             @endforeach
                             @endif
@@ -64,7 +56,6 @@
 <!-- End PAge Content -->
 <!-- ============================================================== -->
 @stop
-
 @section('archivos_script_form')
     <!-- This is data table -->
     <script src="{{ ('assets/plugins/datatables/datatables.min.js') }}"></script>

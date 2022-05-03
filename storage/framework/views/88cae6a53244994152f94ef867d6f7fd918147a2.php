@@ -8,15 +8,12 @@
 		height: 55px;
 	}
 </style>
-<link rel="stylesheet" href="<?php echo e(('assets/css/theme.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(('assets/css/theme.css'), false); ?>">
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-<div id="about">
+<div id="calculoJuego">
 	<br>
-	<br>
-	<br>
-
 	<div class="row text-sm-center">
 		<div class="col-6 col-sm mb-5 mb-sm-0" v-on:click="iniciar()">
 			<i class="svg-icon svg-icon-sm text-primary mb-3">
@@ -49,19 +46,26 @@
 			<h6 class="font-weight-medium text-gray-700" @click="juegoFinalizado()">Finalizar</h6>
 		</div>
 	</div>
-	<div id="juegoEmparejar" class="contenedor-general-matriz">
-		<div class="matriz contenedor-celda-matriz" v-for="(value, key, index) in matriz">
-			<div class="matriz-celda juegoEmparejarMostrar" @click="celdaSeleccionada($event)">
-				<p class="matriz-celda-contenido" @click="emparejar(value)"><?php echo e(key); ?></p>
-			</div>
-		</div>     
-	</div>
+	<!---------- datos de los resultados del estudiante ------------>
+	<input type="text" name="id_prueba_tecnica" value="<?php echo e($DatosJuego->id, false); ?>">
+	<input type="text" name="nombre_prueba_tecnica" value="<?php echo e($DatosJuego->titulo, false); ?>">
+	<input type="text" name="puntaje" id="puntaje">
+	<input type="text" name="tiempo" id="tiempo_juego">
+	<input type="text" name="rude" value="<?php echo e($numero_rude, false); ?>">
+	<input type="text" name="comentario" id="comentario" value="<?php echo e($DatosJuego->tiempo, false); ?>">
+	<input type="text" name="comentario" id="TiempoJuego" value="<?php echo e($DatosJuego->tiempo, false); ?>">
+	<input type="number" name="memoria_calificacion" value="0">
+	<input type="number" name="concentracion_calificacion" value="0">
+	<input type="number" name="calculo_calificacion" value="0">
+	
 </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('archivos_script_form'); ?>
+<?php $__env->startSection('archivos_script_form'); ?>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script>
 	new Vue({
-		el: "#about",
+		el: "#calculoJuego",
 		data() {
 			return {
 				matriz:{
@@ -127,23 +131,47 @@
 					this.emparejar1=""
 					this.emparejar2=""
 				}
-        // console.log("Puntaje:", this.puntaje);
-    },
-    CloseModal() {
-    	this.calificacionGeneral = false;
-    },
-    juegoFinalizado(){ 
-    	var calificacionJuego ={
-    		aprendizaje:"calculo",
-    		nombe:"emparejamiento",
-    		puntaje:this.puntaje
+				console.log("Puntaje:", this.puntaje);
+			},
+			CloseModal() {
+				this.calificacionGeneral = false;
+			},
+			juegoFinalizado(){ 
+				clearInterval(this.tiempo);
+				var calificacionJuego ={
+					aprendizaje:"calculo",
+					nombe:"emparejamiento",
+					puntaje:this.puntaje
 
-    	} 
-    	var estudiante="7062007520132301";
-    	dbfirebase.ref("calificacion/calculo").child(estudiante).push(calificacionJuego);
-    }
-}
-});
+				} 
+				var estudiante="7062007520132301";
+				dbfirebase.ref("calificacion/calculo").child(estudiante).push(calificacionJuego);
+			}
+		},
+		mounted() {
+			let tiempoSegundos=0
+			let tiempoSegundosVideo=0
+			let segundoos=0
+			let juegoo = false
+			document.getElementById('iniciar').addEventListener('click', function() {
+				var time = document.getElementById("TiempoJuego").value;
+				var a = time.split(':') 
+				tiempoSegundos = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+				tiempoSegundosVideo = tiempoSegundos/2
+				juegoo=true;
+			});
+			this.tiempo = setInterval(function(){ 
+				if(juegoo===true){console.log(tiempoSegundos);
+					segundoos++;document.getElementById("tiempo_juego").value=segundoos;
+					if(tiempoSegundos === segundoos){
+						document.getElementById('finalizarJuego').click();
+					}else if(tiempoSegundosVideo == segundoos){
+						console.log("mostrar preguntas")
+					}
+				}
+			}, 1000);
+		},
+	});
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('connect.alumno', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/tec_calculo/juego_emparejamiento.blade.php ENDPATH**/ ?>

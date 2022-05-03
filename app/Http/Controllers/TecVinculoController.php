@@ -97,7 +97,7 @@ class TecVinculoController extends Controller
             //    array_push($imagenesVinculoArray,$celdaImagenPosicion);
             // }
             // $matrizVinculo = json_encode($imagenesVinculoArray); 
-            $formato = array('.jpg', '.png');
+            $formato = array('.jpg', '.png', '.jpeg','.JPG', '.PNG', '.JPEG');//extenciones 
             $imagen_juego = ($_FILES['imagen_juego']['name']);
             $extencion = substr($imagen_juego, strrpos($imagen_juego, '.'));
             if(!in_array($extencion, $formato)) {

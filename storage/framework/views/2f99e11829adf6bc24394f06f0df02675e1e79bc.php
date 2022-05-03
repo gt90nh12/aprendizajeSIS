@@ -5,17 +5,21 @@
 <!-- *********************************************** -->
 
 <?php $__env->startSection('archivos_style_form'); ?>
-<link href="<?php echo e(('assets/plugins/css-chart/css-chart.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(('assets/plugins/css-chart/css-chart.css'), false); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="tab-pane">
-	<div class="card-body">	
-		
-		<hr class="division-juego-descripcion">			
-		<ul class="timeline" id="juegotimeline">
-			
-		</ul>
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">	
+				
+				<hr class="division-juego-descripcion">			
+				<ul class="timeline" id="juegotimeline">
+					
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
 <?php $__env->stopSection(); ?>
@@ -31,7 +35,7 @@
 		if(i % 2 == 0) {
 			if(historial.puntaje>90){
 				var nodoEstudiante = '<li><div class="timeline-badge warning"><img class="img-responsive" alt="user" src="http://localhost/aprendizaje/public/assets/imagenesSIS/trofeo.svg"></div><div class="timeline-panel"><div class="timeline-heading"><h4 class="timeline-title">'+ historial.titulo +'</h4></div><div class="timeline-body"><p><img class="img-responsive" alt="user" src="http://localhost/aprendizaje/public/assets/imagenesSIS/'+ historial.nivel +'"></p><p>'+ historial.descripcion+'</p></div></div></li>';
-					document.getElementById("juegotimeline").innerHTML+=nodoEstudiante;
+				document.getElementById("juegotimeline").innerHTML+=nodoEstudiante;
 			}else{
 				var nodoEstudiante = '<li><div class="timeline-badge danger"><img class="img-responsive" alt="user" src="http://localhost/aprendizaje/public/assets/imagenesSIS/'+ historial.imagen +'"> </div><div class="timeline-panel"><div class="timeline-heading"><h4 class="timeline-title">'+ historial.titulo +'</h4><p><small class="text-muted"><i class="far fa-clock"></i>'+ historial.fecha +'</p></div><div class="timeline-body"><p>'+ historial.descripcion +'</p></div></div></li>';
 				document.getElementById("juegotimeline").innerHTML+=nodoEstudiante;
@@ -40,7 +44,7 @@
 	}else{
 		if(historial.puntaje>90){
 			var nodoEstudiante = '<li class="timeline-inverted"><div class="timeline-badge warning"><img class="img-responsive" alt="user" src="http://localhost/aprendizaje/public/assets/imagenesSIS/trofeo.svg"></div><div class="timeline-panel"><div class="timeline-heading"><h4 class="timeline-title">'+ historial.titulo +'</h4></div><div class="timeline-body"><p><img class="img-responsive" alt="user" src="http://localhost/aprendizaje/public/assets/imagenesSIS/'+ historial.nivel +'"></p><p>'+ historial.descripcion+'</p></div></div></li>';
-					document.getElementById("juegotimeline").innerHTML+=nodoEstudiante;
+			document.getElementById("juegotimeline").innerHTML+=nodoEstudiante;
 		}else{
 			var nodoEstudiante = '<li class="timeline-inverted"><div class="timeline-badge danger"><img class="img-responsive" alt="user" src="http://localhost/aprendizaje/public/assets/imagenesSIS/'+ historial.imagen +'"> </div><div class="timeline-panel"><div class="timeline-heading"><h4 class="timeline-title">'+ historial.titulo +'</h4><p><small class="text-muted"><i class="far fa-clock"></i>'+ historial.fecha +'</p></div><div class="timeline-body"><p>'+ historial.descripcion +'</p></div></div></li>';
 			document.getElementById("juegotimeline").innerHTML+=nodoEstudiante;
@@ -52,4 +56,4 @@
 </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('connect.ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/alumno/historial.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect.alumno', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/alumno/historial.blade.php ENDPATH**/ ?>
