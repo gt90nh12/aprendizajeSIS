@@ -675,61 +675,7 @@
 
 <!-- Testimonials Section -->
 <div class="container space-2 space-3--lg">
-  <div class="row justify-content-lg-center">
-    <div class="col-md-6 col-lg-5 mb-7 mb-md-0">
-      <!-- Testimonials -->
-      <div class="text-center px-lg-4">
-        <div class="mb-2">
-          <img class="u-avatar rounded-circle mx-auto mb-2" src="../../assets/space/img/100x100/img14.jpg" alt="Image Description">
-          <h4 class="h6">Matemáticas</h4>
-        </div>
-        <blockquote class="text-secondary mb-0">
-          Profesor.
-          <br>
-          Estudios realizados.
-          <br>
-          Descripción.
-        </blockquote>
-      </div>
-      <!-- End Testimonials -->
-    </div>
 
-    <div class="col-md-6 col-lg-5">
-      <!-- Testimonials -->
-      <div class="text-center px-lg-4">
-        <div class="mb-2">
-          <img class="u-avatar rounded-circle mx-auto mb-2" src="../../assets/space/img/100x100/img4.jpg" alt="Image Description">
-          <h4 class="h6">Cívica</h4>
-        </div>
-        <blockquote class="text-secondary mb-0">
-          Profesor.
-          <br>
-          Estudios realizados.
-          <br>
-          Descripción.
-        </blockquote>
-      </div>
-      <!-- End Testimonials -->
-    </div>
-
-    <div class="col-md-6 col-lg-5">
-      <!-- Testimonials -->
-      <div class="text-center px-lg-4">
-        <div class="mb-2">
-          <img class="u-avatar rounded-circle mx-auto mb-2" src="../../assets/space/img/100x100/img2.jpg" alt="Image Description">
-          <h4 class="h6">Literatura</h4>
-        </div>
-        <blockquote class="text-secondary mb-0">
-          Profesor.
-          <br>
-          Estudios realizados.
-          <br>
-          Descripción.
-        </blockquote>
-      </div>
-      <!-- End Testimonials -->
-    </div>
-  </div>
 </div>
 <!-- End Testimonials Section -->
 

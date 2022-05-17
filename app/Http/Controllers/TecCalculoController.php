@@ -202,7 +202,7 @@ class TecCalculoController extends Controller
     }
     public function tecnicaCalculos(){
         /*--------------------- Datos alumno  ---------------------*/
-        $usuario_id=auth()->user()->id;
+        $usuario_id=auth()->user()->id; echo $usuario_id;
         $InformacionEstudiante = DB::table('personas')
         ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')
         ->select('alumnos.codigo_rude','alumnos.anio_escolaridad','alumnos.paralelo')
@@ -224,7 +224,10 @@ class TecCalculoController extends Controller
         /*------------------------------------------ Datos alumno ------------------------------------------*/
         $usuario_id=auth()->user()->id;
         $InformacionEstudiante = DB::table('personas')
-        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')->select('alumnos.codigo_rude')->get();
+        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')
+        ->where('personas.id','=',$usuario_id)
+        ->select('alumnos.codigo_rude')
+        ->get();
         $DatosAlumno=$InformacionEstudiante[0];
         $numero_rude = intval($DatosAlumno->codigo_rude);
         /*--------------------------------------------------------------------------------------------------*/

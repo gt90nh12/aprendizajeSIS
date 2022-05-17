@@ -40,17 +40,17 @@
                             <?php if(!empty($usuarios)): ?>
                             <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $usuario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><img class="img-lista img-responsive" src="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e($usuario->direccion_imagen); ?>"></td>
-                                    <td><?php echo e($usuario->name); ?></td>
-                                    <td><?php echo e($usuario->email); ?></td>
-                                    <td><?php echo e($usuario->role); ?></td>
-                                    <td><?php echo e($usuario->created_at); ?></td>
+                                    <td><img class="img-lista img-responsive" src="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e($usuario->direccion_imagen, false); ?>"></td>
+                                    <td><?php echo e($usuario->name, false); ?></td>
+                                    <td><?php echo e($usuario->email, false); ?></td>
+                                    <td><?php echo e($usuario->role, false); ?></td>
+                                    <td><?php echo e($usuario->created_at, false); ?></td>
                                     <td>
-                                    <a href="<?php echo e(route('actualizar_registro_usuario', $usuario->id)); ?>" class="btn btn-warning footable-edit fas fas fa-edit"> </a>
+                                    <a href="<?php echo e(route('actualizar_registro_usuario', $usuario->id), false); ?>" class="btn btn-warning footable-edit fas fas fa-edit"> </a>
                                     <?php if($usuario->estado==true): ?>
-                                        <a href="<?php echo e(route('estado_datos_usuario', $usuario->id)); ?>" class="btn btn-success  fas fa-arrow-alt-circle-up"></a>
+                                        <a href="<?php echo e(route('estado_datos_usuario', $usuario->id), false); ?>" class="btn btn-success  fas fa-arrow-alt-circle-up"></a>
                                     <?php elseif($usuario->estado==false): ?>    
-                                        <a href="<?php echo e(route('estado_datos_usuario', $usuario->id)); ?>" class="btn btn-danger fas fa-arrow-alt-circle-down"></a>
+                                        <a href="<?php echo e(route('estado_datos_usuario', $usuario->id), false); ?>" class="btn btn-danger fas fa-arrow-alt-circle-down"></a>
                                     <?php endif; ?>
                                     </td>
                                 </tr>
@@ -70,7 +70,7 @@
 
 <?php $__env->startSection('archivos_script_form'); ?>
     <!-- This is data table -->
-    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js'), false); ?>"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
@@ -121,9 +121,29 @@
         });
     });
     $('#example23').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'pdf'
         ]
     });
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
@@ -131,7 +151,7 @@
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js'), false); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('connect\ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/usuario/listar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect\administrarUsuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/usuario/listar.blade.php ENDPATH**/ ?>

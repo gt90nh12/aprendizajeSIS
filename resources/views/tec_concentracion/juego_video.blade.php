@@ -21,7 +21,7 @@
 				<i class="svg-icon svg-icon-sm text-primary mb-3">
 					<img class="img-lista img-responsive" id="icono-juego" src="http://localhost/aprendizaje/public/assets/imagenesSIS/tiempo.png"/>
 				</i>
-				<h6 class="font-weight-medium text-gray-700">05:03:00</h6>
+				<!-- <h6 class="font-weight-medium text-gray-700">05:03:00</h6> -->
 			</div>
 			<div class="col-6 col-sm mb-5 mb-sm-0">
 				<i class="svg-icon svg-icon-sm text-primary mb-3">
@@ -99,11 +99,11 @@
 					</div>
 				</div>
 				<!---------- datos de los resultados del estudiante ------------>
-				<input type="text" name="id_prueba_tecnica" value="{{$DatosJuego->id}}" class="div-ocultar">
+				<input type="text" name="id_prueba_tecnica" value="juegoConcentracion" class="div-ocultar">
 				<input type="text" name="nombre_prueba_tecnica" value="{{$DatosJuego->titulo}}" class="div-ocultar">
 				<input type="text" name="puntaje" id="puntaje" class="div-ocultar" value="0">
 				<input type="text" name="tiempo" id="tiempo_juego" class="div-ocultar" value="0">
-				<input type="text" name="rude" value="{{$numero_rude}}" class="div-ocultar">
+				<input type="text" name="rude" value="{{$numero_rude}}" class="ocultar">
 				<input type="text" name="comentario" id="comentario" class="div-ocultar" value="{{$DatosJuego->tiempo}}">
 				<input type="text" name="comentario" id="TiempoJuego" value="{{$DatosJuego->tiempo}}" class="div-ocultar">
 				<input type="number" name="memoria_calificacion" value="0" class="div-ocultar">

@@ -4,7 +4,7 @@
     <!--  Iniciar sesion -->
     <!-- ============================================================== -->
     <section id="wrapper" class="login-register login-sidebar"
-        style="background-image:url(<?php echo e(('assets/images/background/gravedad.jpg'), false); ?>);">
+        style="background-image:url(<?php echo e(('assets/images/background/gravedad.jpeg'), false); ?>);">
         <div class="login-box card">
             <div class="card-body">
             <?php echo Form::open(['url' => '/login_user']); ?>

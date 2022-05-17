@@ -55,13 +55,21 @@ class ConnectController extends Controller
                     ->first()->nobre;
                 if($rol==="Administrador"){
                     DB::table('activity_logs')->insert($activityLog);
-                    return view('connect.ad');
+                    return view('connect.administrarUsuario');
                 }   
+                if($rol==="Director"){
+                    DB::table('activity_logs')->insert($activityLog);
+                    return view('connect.director');
+                }
+                if($rol==="Profesor"){
+                    DB::table('activity_logs')->insert($activityLog);
+                    return view('connect.ad');
+                }     
                 if($rol==="Estudiante"){
                     DB::table('activity_logs')->insert($activityLog);
                     return view('connect.alumno');
-                }   
-                // $admin=DB::table('users')->first()->role;
+                }
+                // $admin=DB::table('users')->firsst()->role;
                 // if($admin===0){
                 //     DB::table('activity_logs')->insert($activityLog);
                 //     return view('connect.alumno');
@@ -364,6 +372,9 @@ class ConnectController extends Controller
     }
     public function backup(){
         return view('connect.backup');   
+    }
+    public function PlantelDocente(){
+        return view('connect.plantel_docente');   
     }
   
 }

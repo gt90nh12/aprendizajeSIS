@@ -280,6 +280,7 @@ class TecConcentracionController extends Controller
         $InformacionEstudiante = DB::table('personas')
         ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')
         ->select('alumnos.codigo_rude','alumnos.anio_escolaridad','alumnos.paralelo')
+        ->where('personas.id','=',$usuario_id)
         ->get();
         $DatosAlumno=$InformacionEstudiante[0];
         $RudeEstudiante = intval($DatosAlumno->codigo_rude);
@@ -300,7 +301,10 @@ class TecConcentracionController extends Controller
         /*------------------------------------------ Datos alumno ------------------------------------------*/
         $usuario_id=auth()->user()->id;
         $InformacionEstudiante = DB::table('personas')
-        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')->select('alumnos.codigo_rude')->get();
+        ->join('alumnos', 'personas.id', '=' ,'alumnos.id_persona')
+        ->where('personas.id','=',$usuario_id)
+        ->select('alumnos.codigo_rude')
+        ->get();
         $DatosAlumno=$InformacionEstudiante[0];
         $numero_rude = intval($DatosAlumno->codigo_rude);
         /*--------------------------------------------------------------------------------------------------*/

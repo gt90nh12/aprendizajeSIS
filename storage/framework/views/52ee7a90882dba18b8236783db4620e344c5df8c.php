@@ -43,7 +43,6 @@
                                     <td><?php echo e($tecnicas->nivel, false); ?></td>
                                     <td><?php echo e($tecnicas->puntaje, false); ?></td>
                                     <td>
-                                        <a href="<?php echo e(route('calificacion_estudiante', $numero_Rude), false); ?>" class="btn btn-secondary icon icon-notebook"> </a>
                                         <a href="<?php echo e(route('juego_cadena',$tecnicas->id), false); ?>" class="btn btn-info mdi mdi-cube-outline"> </a>  
                                     </td>                                 
                                 </tr>

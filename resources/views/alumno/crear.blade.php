@@ -1,14 +1,14 @@
 <!-- ************** Formulario admin *************** -->
-@extends('connect.ad')
-@section('titulo_pagina', 'Alumno')
-@section('descripcion_pagina', 'Formulario registrar alumno')
+@extends('connect.director')
+@section('titulo_pagina', 'Estudiante')
+@section('descripcion_pagina', 'Formulario registrar estudiante')
 <!-- *********************************************** -->
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header bg-info">
-                    <h4 class="mb-0 text-white">Crear alumno</h4>
+                    <h4 class="mb-0 text-white">Crear estudiante</h4>
                 </div>
                  <!-- Seccino de errrores-->
                  @if(Session::has('message'))

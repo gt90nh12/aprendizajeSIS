@@ -43,7 +43,6 @@
                                     <td>{{ $tecnicas->nivel}}</td>
                                     <td>{{ $tecnicas->puntaje}}</td>
                                     <td>
-                                        <a href="{{ route('calificacion_estudiante', $numero_Rude) }}" class="btn btn-secondary icon icon-notebook"> </a>
                                         <a href="{{ route('juego_cadena',$tecnicas->id) }}" class="btn btn-info mdi mdi-cube-outline"> </a>  
                                     </td>                                 
                                 </tr>

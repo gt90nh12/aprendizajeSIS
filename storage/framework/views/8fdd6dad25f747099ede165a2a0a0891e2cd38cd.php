@@ -293,7 +293,7 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
-                    <li class="nav-small-cap">UNIDAD EDUCATIVA</li>
+                    <!-- <li class="nav-small-cap">UNIDAD EDUCATIVA</li>
                     <li>
                         <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-city"></i><span
                                 class="hide-menu">Colegio<span
@@ -303,7 +303,7 @@
                             <li><a href="index3.html">Material aprendizaje</a></li>
                             <li><a href="index2.html">Profesores</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     
                     <li class="nav-devider"></li>
                     <li class="nav-small-cap">TEST DE APRENDIZAJE</li>

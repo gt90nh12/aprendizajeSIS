@@ -264,7 +264,6 @@ class TecCadenaController extends Controller
     }
 
     public function qualification ($rudeEstudiante){
-        $rudeEstudiante=$rudeEstudiante;
         $resultados = DB::table('calificaciones')
         ->where('calificaciones.rude', '=', $rudeEstudiante)
         ->get();
@@ -273,7 +272,8 @@ class TecCadenaController extends Controller
         foreach($resultados as $calificaciones){
             if ($calificaciones->puntaje<=59){
                 $nodo = array(  
-                    "titulo" => "Puntuación baja",
+                    "titulo" => "Puntuación baja ".$calificaciones->puntaje,
+                    "NombrePruebaTecnica" => $calificaciones->nombre_prueba_tecnica,
                     "puntaje" => $calificaciones->puntaje,
                     "fecha" => $calificaciones->created_at,
                     "descripcion" => "La puntuacion obtenida es muy baja, se recomienda que el estudiante comience en el nivel basico.",
@@ -282,7 +282,8 @@ class TecCadenaController extends Controller
             }
             if ($calificaciones->puntaje >= 60 and $calificaciones->puntaje <= 69){
                 $nodo = array(  
-                    "titulo" => "Puntuación medio baja",
+                    "titulo" => "Puntuación medio baja ".$calificaciones->puntaje,
+                    "NombrePruebaTecnica" => $calificaciones->nombre_prueba_tecnica,
                     "puntaje" => $calificaciones->puntaje,
                     "fecha" => $calificaciones->created_at,
                     "descripcion" => "La puntuacion obtenida, es demasiado bajo.",
@@ -291,7 +292,8 @@ class TecCadenaController extends Controller
             }
             if ($calificaciones->puntaje >= 70 and $calificaciones->puntaje <= 79){
                 $nodo = array(  
-                    "titulo" => "Puntuación medio alta",
+                    "titulo" => "Puntuación medio alta ".$calificaciones->puntaje,
+                    "NombrePruebaTecnica" => $calificaciones->nombre_prueba_tecnica,
                     "puntaje" => $calificaciones->puntaje,
                     "fecha" => $calificaciones->created_at,
                     "descripcion" => "La puntuacion obtenida, es aceptable.",
@@ -300,26 +302,39 @@ class TecCadenaController extends Controller
             }
             if ($calificaciones->puntaje >= 80 and $calificaciones->puntaje <= 89){
                 $nodo = array(  
-                    "titulo" => "Puntuación alta",
+                    "titulo" => "Puntuación alta ".$calificaciones->puntaje,
+                    "NombrePruebaTecnica" => $calificaciones->nombre_prueba_tecnica,
                     "puntaje" => $calificaciones->puntaje,
                     "fecha" => $calificaciones->created_at,
                     "descripcion" => "Felicidades se obtuvo una  puntuacion alta, falta poco para pasar de nivel.",
                     "imagen" => "alto.svg"
                 );
             }
-            if ($calificaciones->puntaje >= 90 and $calificaciones->puntaje <= 199){
+            if ($calificaciones->puntaje >= 90 and $calificaciones->puntaje <= 100){
                 $nodo = array(  
-                    "titulo" => "Puntuación alta",
+                    "titulo" => "Puntuación alta ".$calificaciones->puntaje,
+                    "NombrePruebaTecnica" => $calificaciones->nombre_prueba_tecnica,
                     "puntaje" => $calificaciones->puntaje,
                     "fecha" => $calificaciones->created_at,
                     "descripcion" => "Nivel superado exitosamente, la puntuacion obtenida permitira avanzar de nivel.",
-                    "imagen" => "trofeo.png",
+                    "imagen" => "trofeo.svg",
                     "nivel" => "siguenteNivel.png"
                 );
             };
             array_push($calificacionesl,$nodo);
         }
+        $alumnos = DB::table('alumnos')
+        ->join('personas', 'personas.id', '=', 'alumnos.id_persona')
+        ->join('users', 'users.persona_id', '=', 'personas.ci')
+        ->where('alumnos.codigo_rude', '=', $rudeEstudiante)
+        ->select('personas.id as identificador', 'users.direccion_imagen', 'personas.nombre', 'personas.apellido_paterno', 'personas.apellido_materno', 'alumnos.id', 'alumnos.estado', 'alumnos.anio_escolaridad', 'alumnos.paralelo', 'alumnos.codigo_rude')
+        ->get();
+        $datosEstudiante = $alumnos[0];
+        $nombreEstudiante = $datosEstudiante->nombre ." ".$datosEstudiante->apellido_paterno ." ". $datosEstudiante->apellido_materno;
+        $anioEscolaridadEstudiante = $datosEstudiante->anio_escolaridad." ".$datosEstudiante->paralelo;
+        $estudianterudeimagen = $datosEstudiante->direccion_imagen;
+
         $historialEstudiante=json_encode($calificacionesl);
-        return view('alumno.historial')->with(compact('historialEstudiante'));
+        return view('alumno.historial')->with(compact('historialEstudiante','alumnos','nombreEstudiante','anioEscolaridadEstudiante','estudianterudeimagen'));
     }
 }

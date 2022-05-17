@@ -30,15 +30,15 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <h5 class="form_descripcion">Género <span class="text-danger">*</span></h5>
+                    <h5 class="form_descripcion">Sexo <span class="text-danger">*</span></h5>
                     <div class="controls">
                         <select name="genero" id="select" class="form-control" required
-                            data-validation-required-message="El genero es requerido">
-                            <option value="">Seleccione género</option>
-                            @if     ($persona->sexo == "mujer")
+                            data-validation-required-message="El Sexo es requerido">
+                            <option value="">Seleccione Sexo</option>
+                            @if     ($persona->sexo == "fememnino")
                                 <option value="varon">Masculino</option>
                                 <option value="mujer" selected>Femenino</option>
-                            @elseif ($persona->sexo == "varon")
+                            @elseif ($persona->sexo == "masculino")
                                 <option value="varon"selected>Masculino</option>
                                 <option value="mujer">Femenino</option>
                             @else
@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <h5 class="form_descripcion">Correo electrónico<span class="text-danger">*</span></h5>
+                    <h5 class="form_descripcion">Dirección<span class="text-danger">*</span></h5>
                     <div class="controls">
                         <input type="email"  name="correo_electronico" class="form-control" required
                             data-validation-required-message="El correo electronico es requerido" value="{{ $persona->correo_electronico }}">

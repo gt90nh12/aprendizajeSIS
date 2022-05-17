@@ -29,7 +29,6 @@ Route::post('/registro_administrador', 'ConnectController@registroAdministrador'
 Route::get('/cerrar_session', 'ConnectController@logout')->name('cerrar_session');
 Route::get('/log_user', 'ConnectController@activityLoginLogOut')->name('log_user');
 
-
 //Router admin
 Route::get('/ad', 'AdministradorController@index')->name('ad');
 
@@ -113,8 +112,8 @@ Route::post('/almacenar_alumno','AlumnoController@store')->name('almacenar_alumn
 Route::get('/mostrar_alumno{id}', 'AlumnoController@edit')->name('mostrar_alumno');
 // Route::post('/modificar_escuela{id}', 'EscuelaController@update')->name('modificar_escuela');
 Route::get('/estado_alumno{id}', 'AlumnoController@destroy')->name('estado_alumno');
-Route::get('/progreso_estudiante{id}', 'AlumnoController@progreso_estudiante')->name('progreso_estudiante');
 Route::get('/historial_estudiante{rude}', 'AlumnoController@historial_estudiante')->name('historial_estudiante');
+Route::get('/listar_estudiante','AlumnoController@listarestudiante')->name('listar_estudiante');
 
 /*----------------------------------------------- CALIFICACIÓN ------------------------------------------------*/
 Route::post('/almacenar_calificacion','CalificaionController@store')->name('almacenar_calificacion');
@@ -137,8 +136,20 @@ Route::get('/inicio', function () {
     return view('welcome');
 });
 
+/*----------------------------------- INFORMACION DEL ADMIN ------------------------------------------*/
+Route::get('/PlantelDocente', 'ConnectController@PlantelDocente')->name('PlantelDocente');
+
+
 /*---------------------------------- LOG DEL SISTEMA ----------------------------------*/
 Route::get('/log_user', 'ConnectController@activityLoginLogOut')->name('log_user');
 
 /*---------------------------------- COPIAS DE SEGURIDAD ----------------------------------*/
 Route::get('/copia_seguridad', 'ConnectController@backup')->name('copia_seguridad');
+
+/*perfil del director*/
+Route::get('/director_listar_alumno','AlumnoController@listaralumno')->name('director_listar_alumno');
+Route::get('/progreso_estudiante{id}', 'AlumnoController@progreso_estudiante')->name('progreso_estudiante');
+Route::get('/unidad_educativa','EscuelaController@inforcion_colegio')->name('unidad_educativa');
+Route::get('/crear_escuela','EscuelaController@create')->name('crear_escuela');
+Route::get('/misionUE','EscuelaController@misionUE')->name('misionUE');
+Route::get('/visionUE','EscuelaController@visionUE')->name('visionUE');

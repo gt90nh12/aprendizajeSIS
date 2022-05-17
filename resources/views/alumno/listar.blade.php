@@ -1,7 +1,7 @@
 <!-- ************** Formulario admin *************** -->
-@extends('connect\ad')
-@section('titulo_pagina', 'Alumno')
-@section('descripcion_pagina', 'Formulario listar de alumno')
+@extends('connect\director')
+@section('titulo_pagina', 'Estudiante')
+@section('descripcion_pagina', 'Formulario listar de estudiante')
 <!-- *********************************************** -->
 @section('content')
 <!-- ============================================================== -->
@@ -118,12 +118,29 @@
 
     });
     $('#example23').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'pdf',
         ]
     });
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');

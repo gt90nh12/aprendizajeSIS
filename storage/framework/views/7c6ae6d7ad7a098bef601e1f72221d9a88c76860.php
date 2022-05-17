@@ -13,13 +13,13 @@
              <!-- Seccino de errrores-->
                     <?php if(Session::has('message')): ?>
                         <div class="container">
-                            <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                                <?php echo e(Session::get('message')); ?>
+                            <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                                <?php echo e(Session::get('message'), false); ?>
 
                                 <?php if($errors->any()): ?>
                                     <ul>
                                         <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li><?php echo e($error); ?></li>
+                                            <li><?php echo e($error, false); ?></li>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </ul>
                                 <?php endif; ?>
@@ -34,7 +34,7 @@
             <?php echo Form::open(['url' => '/modificar_datos_usuario', 'enctype'=>'multipart/form-data', 'method'=>'post']); ?>
 
              
-              <?php echo e(csrf_field()); ?>
+              <?php echo e(csrf_field(), false); ?>
 
                 <div class="form-body">
                     <div class="card-body">
@@ -52,7 +52,7 @@
                                         
                                         
                                         <input type="file" id="input-file-now" name="imagen" class="dropify"
-                                            data-allowed-file-extensions="png" data-default-file="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e($usuario->direccion_imagen); ?>" />
+                                            data-allowed-file-extensions="png" data-default-file="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e($usuario->direccion_imagen, false); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                                 </span>
                                             </div>
                                             <input type="number" name="persona_id" class="form-control"
-                                                value="<?php echo e($usuario->persona_id); ?>" required disabled>
+                                                value="<?php echo e($usuario->persona_id, false); ?>" required disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                                 <i class="ti-email "></i>
                                             </span>
                                         </div>
-                                        <input type="text" name="email" class="form-control" value="<?php echo e($usuario->email); ?>"
+                                        <input type="text" name="email" class="form-control" value="<?php echo e($usuario->email, false); ?>"
                                             required>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                                             </span>
                                         </div>
                                         <input type="text" name="password" class="form-control" value="********" required disabled>
-                                        <input type="hidden" name="id" class="form-control" value="<?php echo e($usuario->id); ?>" required>
+                                        <input type="hidden" name="id" class="form-control" value="<?php echo e($usuario->id, false); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                                 <i class="mdi mdi-account"></i>
                                             </span>
                                         </div>
-                                        <input type="text" name='name' class="form-control" value="<?php echo e($usuario->name); ?>"
+                                        <input type="text" name='name' class="form-control" value="<?php echo e($usuario->name, false); ?>"
                                             required>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                     <div class="form-actions">
                         <div class="card-body">
                             <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>
-                            <a href="<?php echo e(route('listar_usuario')); ?>" class="btn btn-dark">Cancelar</a>
+                            <a href="<?php echo e(route('listar_usuario'), false); ?>" class="btn btn-dark">Cancelar</a>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('archivos_script_form'); ?>
 <!-- jQuery file upload -->
-<script src='<?php echo e(('assets/plugins/dropify/dist/js/dropify.min.js')); ?>'></script>
+<script src='<?php echo e(('assets/plugins/dropify/dist/js/dropify.min.js'), false); ?>'></script>
 <script>
     $(document).ready(function () {
         $('.dropify').dropify({
@@ -210,4 +210,4 @@
 </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('connect.ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/usuario/actualizar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect.administrarUsuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/usuario/actualizar.blade.php ENDPATH**/ ?>

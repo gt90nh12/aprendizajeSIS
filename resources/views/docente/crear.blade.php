@@ -1,5 +1,5 @@
 <!-- ************** Formulario admin *************** -->
-@extends('connect.ad')
+@extends('connect.director')
 @section('titulo_pagina', 'Docente')
 @section('descripcion_pagina', 'Formulario registrar docente')
 <!-- *********************************************** -->

@@ -46,6 +46,12 @@ class EscuelaController extends Controller
             'nombre'      =>  'required',
             'direccion' => 'required',
             'email'=> 'required',
+            'telefono'=> 'required',
+            'celular'=> 'required',
+            'lunesviernes'=> 'required',
+            'sabado'=> 'required',
+            'mision'=> 'required',
+            'vision'=> 'required',
             'descripcion'      =>  'required',
             'direccion_imagen'  =>  'required',
         ];
@@ -53,6 +59,12 @@ class EscuelaController extends Controller
             'nombre.required' => 'El rol de usuario es requerido.',
             'direccion.required' => 'El rol de direccion es requerido.',
             'email.required' => 'El rol de email es requerido.',
+            'telefono.required' => 'El télefono es requerido.',
+            'celular.required' => 'El celular es requerido.',
+            'lunesviernes.required' => 'Los horarios de atención de los días lunes a viernes son requeridos.',
+            'sabado.required' => 'El horarios de atención del día sabado es requeridos.',
+            'mision.required' => 'La misión  de la unidad educativa es requerida.',
+            'vision.required' => 'La visión  de la unidad educativa es requerida.',
             'descripcion.required' => 'La descripción del rol es requerido.',
             'direccion_imagen.required' => 'La imagen que representa al rol de usuario es requerido.',
         ];
@@ -82,13 +94,19 @@ class EscuelaController extends Controller
             $escuela->direccion = e($request->input('direccion'));
             $escuela->imagen = $nombreArchivo;
             $escuela->email = e($request->input('email'));
+            $escuela->telefono = e($request->input('telefono'));
+            $escuela->celular = e($request->input('celular'));
+            $escuela->lunesviernes = e($request->input('lunesviernes'));
+            $escuela->sabado = e($request->input('sabado'));
+            $escuela->mision = e($request->input('mision'));
+            $escuela->vision = e($request->input('vision'));
             $escuela->nivel_primario= $primaria;
             $escuela->nivel_secundario= $secundaria;
             $escuela->descripcion = e($request->input('descripcion'));
             $escuela->estado = false;
             if($escuela->save()):
                 return redirect()->route('listar_escuela');
-                endif;
+            endif;
         endif;
     }
 
@@ -125,22 +143,32 @@ class EscuelaController extends Controller
      */
     public function update(Request $request, $idv)
     {
-            $id=$idv;
+        $id=$idv;
             $direccion_imagen = ($_FILES['direccion_imagen']['name']);//Nombre de la imagen
-         
+
             $rules=[
                 'nombre'      =>  'required',
                 'direccion' => 'required',
                 'email'=> 'required',
+                'telefono'=> 'required',
+                'celular'=> 'required',
+                'lunesviernes'=> 'required',
+                'sabado'=> 'required',
+                'mision'=> 'required',
+                'vision'=> 'required',
                 'descripcion'      =>  'required',
-                'direccion_imagen'  =>  'required',
             ];
             $messages =[
                 'nombre.required' => 'El rol de usuario es requerido.',
                 'direccion.required' => 'El rol de direccion es requerido.',
                 'email.required' => 'El rol de email es requerido.',
+                'telefono.required' => 'El télefono es requerido.',
+                'celular.required' => 'El celular es requerido.',
+                'lunesviernes.required' => 'Los horarios de atención de los días lunes a viernes son requeridos.',
+                'sabado.required' => 'El horarios de atención del día sabado es requeridos.',
+                'mision.required' => 'La misión  de la unidad educativa es requerida.',
+                'vision.required' => 'La visión  de la unidad educativa es requerida.',
                 'descripcion.required' => 'La descripción del rol es requerido.',
-                'direccion_imagen.required' => 'La imagen del logo del colegio es requerido.',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             if($validator->fails()):
@@ -158,14 +186,20 @@ class EscuelaController extends Controller
                         move_uploaded_file($_FILES['direccion_imagen']['tmp_name'], $ruta);
                     }
                     $primaria=e($request->input('nivel_primario'));
-                     if ($primaria == ""){$primaria= false;}
-                     $secundaria=e($request->input('nivel_secundario'));
+                    if ($primaria == ""){$primaria= false;}
+                    $secundaria=e($request->input('nivel_secundario'));
                     if ($secundaria == ""){$secundaria= false;}
                     $escuela = escuela::find($id);
                     $escuela->nombre = e($request->input('nombre'));
                     $escuela->direccion = e($request->input('direccion'));
                     $escuela->imagen = $imagenEscuela;
                     $escuela->email = e($request->input('email'));
+                    $escuela->telefono = e($request->input('telefono'));
+                    $escuela->celular = e($request->input('celular'));
+                    $escuela->lunesviernes = e($request->input('lunesviernes'));
+                    $escuela->sabado = e($request->input('sabado'));
+                    $escuela->mision = e($request->input('mision'));
+                    $escuela->vision = e($request->input('vision'));
                     $escuela->nivel_primario= $primaria;
                     $escuela->nivel_secundario= $secundaria;
                     $escuela->descripcion = e($request->input('descripcion'));
@@ -178,24 +212,30 @@ class EscuelaController extends Controller
                     $primaria=e($request->input('nivel_primario'));
                     if ($primaria == ""){$primaria= false;}
                     $secundaria=e($request->input('nivel_secundario'));
-                   if ($secundaria == ""){$secundaria= false;}
-                   $escuela = escuela::find($id);
-                   $escuela->nombre = e($request->input('nombre'));
-                   $escuela->direccion = e($request->input('direccion'));
-                   $escuela->imagen = $imagenEscuela;
-                   $escuela->email = e($request->input('email'));
-                   $escuela->nivel_primario= $primaria;
-                   $escuela->nivel_secundario= $secundaria;
-                   $escuela->descripcion = e($request->input('descripcion'));
-                   $escuela->estado = false;
-                   if($escuela->save()):
+                    if ($secundaria == ""){$secundaria= false;}
+                    $escuela = escuela::find($id);
+                    $escuela->nombre = e($request->input('nombre'));
+                    $escuela->direccion = e($request->input('direccion'));
+                    $escuela->imagen = e($request->input('imagen_nombre_colegio'));
+                    $escuela->email = e($request->input('email'));
+                    $escuela->telefono = e($request->input('telefono'));
+                    $escuela->celular = e($request->input('celular'));
+                    $escuela->lunesviernes = e($request->input('lunesviernes'));
+                    $escuela->sabado = e($request->input('sabado'));
+                    $escuela->mision = e($request->input('mision'));
+                    $escuela->vision = e($request->input('vision'));
+                    $escuela->nivel_primario= $primaria;
+                    $escuela->nivel_secundario= $secundaria;
+                    $escuela->descripcion = e($request->input('descripcion'));
+                    $escuela->estado = false;
+                    if($escuela->save()):
                     //    return back()->withErrors($validator)->with('message','Se actualizo los datos del usuario')->with('typealert', 'success');
-                   return redirect()->route('listar_escuela');                  
-                endif;
-                }
-            endif;
-        
-    }
+                     return redirect()->route('listar_escuela');                  
+                 endif;
+             }
+         endif;
+
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -220,5 +260,24 @@ class EscuelaController extends Controller
         }else{
             return redirect()->route('listar_escuela');
         }
+    }
+
+    public function inforcion_colegio(){
+        $escuelas = Escuela::all();
+        $nombreUE=$escuelas[0]->nombre;
+        $imagenUE=$escuelas[0]->imagen;
+        $direccionUE=$escuelas[0]->direccion;
+        $telefonoUE=$escuelas[0]->telefono;
+        $celularUE=$escuelas[0]->celular;
+        $correoElectronicoUE=$escuelas[0]->email;
+        $HorarioUEViernes=$escuelas[0]->lunesviernes;
+        $HorarioUESabado=$escuelas[0]->sabado;
+        return view('perfil_director.unidad_educativa')->with(compact('nombreUE','imagenUE','direccionUE','telefonoUE','celularUE','correoElectronicoUE','HorarioUEViernes','HorarioUESabado'));
+    }
+    public function misionUE(){
+        return view('perfil_director.mision');
+    }
+    public function visionUE(){
+        return view('perfil_director.vision');
     }
 }

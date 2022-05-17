@@ -32,13 +32,13 @@
                                 <!-- Seccino de errrores-->
                                 <?php if(Session::has('message')): ?>
                                 <div class="container">
-                                    <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                                        <?php echo e(Session::get('message')); ?>
+                                    <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                                        <?php echo e(Session::get('message'), false); ?>
 
                                         <?php if($errors->any()): ?>
                                         <ul>
                                             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li><?php echo e($error); ?></li>
+                                            <li><?php echo e($error, false); ?></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                         <?php endif; ?>
@@ -122,20 +122,20 @@
                             $rol->direccion_imagen."||";
                             ?>
                             <tr>
-                                <td><?php echo e($rol->id); ?></td>
-                                <td><?php echo e($rol->nobre); ?></td>
-                                <td><?php echo e($rol->descripcion); ?></td>
-                                <td><?php echo e($rol->direccion_imagen); ?></td>
+                                <td><?php echo e($rol->id, false); ?></td>
+                                <td><?php echo e($rol->nobre, false); ?></td>
+                                <td><?php echo e($rol->descripcion, false); ?></td>
+                                <td><?php echo e($rol->direccion_imagen, false); ?></td>
                                 <td>
                                     <img class="img-lista img-responsive"
-                                        src="http://localhost/aprendizaje/public/img/roles_usuario/<?php echo e($rol->direccion_imagen); ?>">
+                                        src="http://localhost/aprendizaje/public/img/roles_usuario/<?php echo e($rol->direccion_imagen, false); ?>">
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-warning footable-edit fas fas fa-edit" data-toggle="modal" data-target="#modalEdicion" onclick="agregarform('<?php echo $datos ?>')"> </a>
                                     <?php if($rol->estado==true): ?>
-                                    <a href="<?php echo e(route('estado_role', $rol->id)); ?>" class="btn btn-success  fas fa-arrow-alt-circle-up"></a>
+                                    <a href="<?php echo e(route('estado_role', $rol->id), false); ?>" class="btn btn-success  fas fa-arrow-alt-circle-up"></a>
                                     <?php elseif($rol->estado==false): ?>
-                                    <a href="<?php echo e(route('estado_role', $rol->id)); ?>" class="btn btn-danger fas fa-arrow-alt-circle-down"></a>
+                                    <a href="<?php echo e(route('estado_role', $rol->id), false); ?>" class="btn btn-danger fas fa-arrow-alt-circle-down"></a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -159,13 +159,13 @@
                                 <!-- Seccino de errrores-->
                                 <?php if(Session::has('message')): ?>
                                 <div class="container">
-                                    <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                                        <?php echo e(Session::get('message')); ?>
+                                    <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                                        <?php echo e(Session::get('message'), false); ?>
 
                                         <?php if($errors->any()): ?>
                                         <ul>
                                             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li><?php echo e($error); ?></li>
+                                            <li><?php echo e($error, false); ?></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                         <?php endif; ?>
@@ -227,7 +227,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('archivos_script_form'); ?>
 <!-- jQuery file upload -->
-<script src='<?php echo e(('assets/plugins/dropify/dist/js/dropify.min.js')); ?>'></script>
+<script src='<?php echo e(('assets/plugins/dropify/dist/js/dropify.min.js'), false); ?>'></script>
 
 <script>
     $(document).ready(function () {
@@ -278,4 +278,4 @@
 </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('connect\ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/role/list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect\administrarUsuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/role/list.blade.php ENDPATH**/ ?>

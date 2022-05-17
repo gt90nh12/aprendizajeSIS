@@ -19,7 +19,7 @@ class CreatePersonasTable extends Migration
             $table->text('apellido_paterno');
             $table->text('apellido_materno');
             $table->date('fecha_nacimiento');
-            $table->string('sexo',6);
+            $table->string('sexo',9);
             $table->integer('celular');
             $table->integer('ci');
             $table->text('correo_electronico');

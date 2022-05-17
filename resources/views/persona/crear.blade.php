@@ -1,5 +1,5 @@
 <!-- ************** Formulario admin *************** -->
-@extends('connect.ad')
+@extends('connect.administrarUsuario')
 @section('titulo_pagina', 'Persona')
 @section('descripcion_pagina', 'Formulario registrar persona')
 <!-- *********************************************** -->

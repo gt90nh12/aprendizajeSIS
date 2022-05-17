@@ -19,6 +19,12 @@ class CreateEscuelasTable extends Migration
             $table->text('direccion');
             $table->text('imagen');
             $table->text('email');
+            $table->text('telefono');
+            $table->text('celular');
+            $table->text('lunesviernes');
+            $table->text('sabado');
+            $table->text('mision');
+            $table->text('vision');
             $table->boolean('nivel_primario');
             $table->boolean('nivel_secundario');
             $table->text('descripcion');

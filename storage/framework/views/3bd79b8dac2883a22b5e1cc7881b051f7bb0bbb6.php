@@ -13,13 +13,13 @@
                  <!-- Seccino de errrores-->
                     <?php if(Session::has('message')): ?>
                         <div class="container">
-                            <div class="alert alert-<?php echo e(Session::get('typealert')); ?>" style="display:none;">
-                                <?php echo e(Session::get('message')); ?>
+                            <div class="alert alert-<?php echo e(Session::get('typealert'), false); ?>" style="display:none;">
+                                <?php echo e(Session::get('message'), false); ?>
 
                                 <?php if($errors->any()): ?>
                                     <ul>
                                         <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li><?php echo e($error); ?></li>
+                                            <li><?php echo e($error, false); ?></li>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </ul>
                                 <?php endif; ?>
@@ -30,8 +30,8 @@
                             </div>
                         </div>
                     <?php endif; ?>
-                <form method="post" action="<?php echo e(route('almacenar_usuario')); ?>" class="mt-5" enctype="multipart/form-data" novalidate>
-                    <?php echo e(csrf_field()); ?>
+                <form method="post" action="<?php echo e(route('almacenar_usuario'), false); ?>" class="mt-5" enctype="multipart/form-data" novalidate>
+                    <?php echo e(csrf_field(), false); ?>
 
                     <?php echo $__env->make('usuario._form_usuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </form>
@@ -41,9 +41,9 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('archivos_script_form'); ?>
  <!-- checked - radio -->
-    <script src="<?php echo e(('assets/plugins/icheck/icheck.min.js')); ?>"></script>
-    <script src="<?php echo e(('assets/plugins/icheck/icheck.init.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/icheck/icheck.min.js'), false); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/icheck/icheck.init.js'), false); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 
-<?php echo $__env->make('connect.ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/usuario/crear.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect.administrarUsuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/usuario/crear.blade.php ENDPATH**/ ?>

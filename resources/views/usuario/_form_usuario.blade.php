@@ -111,7 +111,7 @@
                                 <i class="mdi mdi-key-variant"></i>
                             </span>
                         </div>
-                        <input type="text" name="password" class="form-control" required>
+                        <input type="password" name="password" class="form-control" required>
                     </div>
                 </div>
             </div>

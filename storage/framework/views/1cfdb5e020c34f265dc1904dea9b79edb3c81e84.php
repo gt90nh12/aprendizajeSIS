@@ -1,7 +1,7 @@
 <!-- ************** Formulario admin *************** -->
 
-<?php $__env->startSection('titulo_pagina', 'Alumno'); ?>
-<?php $__env->startSection('descripcion_pagina', 'Formulario listar de alumno'); ?>
+<?php $__env->startSection('titulo_pagina', 'Estudiante'); ?>
+<?php $__env->startSection('descripcion_pagina', 'Formulario listar de estudiante'); ?>
 <!-- *********************************************** -->
 <?php $__env->startSection('content'); ?>
 <!-- ============================================================== -->
@@ -35,17 +35,17 @@
                             <?php if(!empty($alumnos)): ?>
                             <?php $__currentLoopData = $alumnos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $alumno): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><img class="img-lista img-responsive" src="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e($alumno->direccion_imagen); ?>"></td>
-                                    <td><?php echo e($alumno->nombre); ?> <?php echo e($alumno->apellido_paterno); ?> <?php echo e($alumno->apellido_materno); ?></td>
-                                    <td><?php echo e($alumno->anio_escolaridad); ?> - <?php echo e($alumno->paralelo); ?></td>
+                                    <td><img class="img-lista img-responsive" src="http://localhost/aprendizaje/public/img/perfil_usuario/<?php echo e($alumno->direccion_imagen, false); ?>"></td>
+                                    <td><?php echo e($alumno->nombre, false); ?> <?php echo e($alumno->apellido_paterno, false); ?> <?php echo e($alumno->apellido_materno, false); ?></td>
+                                    <td><?php echo e($alumno->anio_escolaridad, false); ?> - <?php echo e($alumno->paralelo, false); ?></td>
                                     <td>
-                                    <a href="<?php echo e(route('mostrar_alumno', $alumno->id)); ?>" class="btn btn-warning footable-edit fas fas fa-edit"> </a>
+                                    <a href="<?php echo e(route('mostrar_alumno', $alumno->id), false); ?>" class="btn btn-warning footable-edit fas fas fa-edit"> </a>
                                     <?php if($alumno->estado==true): ?>
-                                        <a href="<?php echo e(route('estado_alumno', $alumno->id)); ?>" class="btn btn-success  mdi mdi-arrow-up-bold-circle"></a>
+                                        <a href="<?php echo e(route('estado_alumno', $alumno->id), false); ?>" class="btn btn-success  mdi mdi-arrow-up-bold-circle"></a>
                                     <?php elseif($alumno->estado==false): ?>    
-                                        <a href="<?php echo e(route('estado_alumno', $alumno->id)); ?>" class="btn btn-danger mdi mdi-arrow-down-bold-circle"></a>
+                                        <a href="<?php echo e(route('estado_alumno', $alumno->id), false); ?>" class="btn btn-danger mdi mdi-arrow-down-bold-circle"></a>
                                     <?php endif; ?>
-                                   <a href="<?php echo e(route('progreso_estudiante', $alumno->codigo_rude)); ?>" class="btn btn-info mdi mdi-chart-areaspline"></a>
+                                   <a href="<?php echo e(route('progreso_estudiante', $alumno->codigo_rude), false); ?>" class="btn btn-info mdi mdi-chart-areaspline"></a>
                                     </td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -64,7 +64,7 @@
 
 <?php $__env->startSection('archivos_script_form'); ?>
     <!-- This is data table -->
-    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/datatables/datatables.min.js'), false); ?>"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
@@ -118,12 +118,29 @@
 
     });
     $('#example23').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'pdf',
         ]
     });
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
@@ -131,7 +148,7 @@
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js')); ?>"></script>
+    <script src="<?php echo e(('assets/plugins/styleswitcher/jQuery.style.switcher.js'), false); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('connect\ad', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/alumno/listar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect\director', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/alumno/listar.blade.php ENDPATH**/ ?>

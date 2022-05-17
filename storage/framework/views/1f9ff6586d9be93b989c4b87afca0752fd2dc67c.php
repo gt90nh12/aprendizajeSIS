@@ -94,7 +94,7 @@
         <i class="svg-icon svg-icon-sm text-primary mb-3">
           <img class="img-lista img-responsive" id="icono-juego" src="http://localhost/aprendizaje/public/assets/imagenesSIS/tiempo.png"/>
         </i>
-        <h6 class="font-weight-medium text-gray-700">05:03:00</h6>
+        <!-- <h6 class="font-weight-medium text-gray-700">05:03:00</h6> -->
       </div>
       <div class="col-6 col-sm mb-5 mb-sm-0">
         <i class="svg-icon svg-icon-sm text-primary mb-3">
@@ -123,7 +123,7 @@
         </div>
       </div>
     </div>
-    <input type="text" class="div-ocultar" name="id_prueba_tecnica" value="<?php echo e($juegoCadena->id, false); ?>">
+    <input type="text" class="div-ocultar" name="id_prueba_tecnica" value="juegoMemoria">
     <input type="text" class="div-ocultar" name="nombre_prueba_tecnica" value="<?php echo e($juegoCadena->titulo, false); ?>">
     <input type="text" class="div-ocultar" name="rude"  value="<?php echo e($numero_rude, false); ?>">
     <input type="text" class="div-ocultar" name="puntaje" id="puntaje" value=0>

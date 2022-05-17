@@ -76,7 +76,7 @@
 			?>
 		</div>
 		<!---------- datos de los resultados del estudiante ------------>
-		<input type="text" name="id_prueba_tecnica" class="ocultar" value="<?php echo e($DatosJuego->id, false); ?>">
+		<input type="text" name="id_prueba_tecnica" class="ocultar" value="juegoCalculo">
 		<input type="text" name="nombre_prueba_tecnica" class="ocultar" value="<?php echo e($DatosJuego->titulo, false); ?>">
 		<input type="text" name="puntaje" id="puntaje" class="ocultar" value="0">
 		<input type="text" name="tiempo" id="tiempo_juego" class="ocultar" value="0">

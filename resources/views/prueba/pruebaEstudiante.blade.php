@@ -71,14 +71,14 @@
 					@endforeach
 				</div>
 				<input type="button"  class="btn btn-success" @click="evaluar()" value="Evaluar">
-				<input type="text" name="id_prueba_tecnica" value="<?php echo $nombrePrueba; ?>">
-				<input type="text" name="nombre_prueba_tecnica" value="<?php echo $nombrePrueba; ?>">
-				<input type="text" id="tiempo_prueba" name="tiempo">			
-				<input type="text" id="puntaje" name="puntaje">
-				<input type="text" id="puntaje_concentracion" name="concentracion_calificacion" value="0">
-				<input type="text" id="puntaje_memoria" name="memoria_calificacion" value="0">
-				<input type="text" id="puntaje_calculo" name="calculo_calificacion" value="0">
-				<input type="text" name="rude" value="<?php echo $estudianterude; ?>">
+				<input type="hidden" name="id_prueba_tecnica" value="<?php echo $nombrePrueba; ?>">
+				<input type="hidden" name="nombre_prueba_tecnica" value="<?php echo $nombrePrueba; ?>">
+				<input type="hidden" id="tiempo_prueba" name="tiempo">			
+				<input type="hidden" id="puntaje" name="puntaje">
+				<input type="hidden" id="puntaje_concentracion" name="concentracion_calificacion" value="0">
+				<input type="hidden" id="puntaje_memoria" name="memoria_calificacion" value="0">
+				<input type="hidden" id="puntaje_calculo" name="calculo_calificacion" value="0">
+				<input type="hidden" name="rude" value="<?php echo $estudianterude; ?>">
 				<button id="AlmacenarPrueba" class="div-ocultar">Enviar</button>
 			</form>
 		</div>

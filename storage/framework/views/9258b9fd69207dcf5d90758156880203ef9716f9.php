@@ -10,11 +10,11 @@
                 <div class="card-header bg-info">
                     <h4 class="mb-0 text-white">actualizar registro</h4>
                 </div>
-                <form action="<?php echo e($action); ?>" class="mt-5" novalidate>
+                <form action="<?php echo e($action, false); ?>" class="mt-5" novalidate>
                     <?php echo $__env->make('persona._form_persona', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </form>
             </div>
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('connect.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/persona/actualizar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('connect.administrarUsuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\aprendizaje\resources\views/persona/actualizar.blade.php ENDPATH**/ ?>

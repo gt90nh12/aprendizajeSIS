@@ -773,3 +773,7 @@ transition: opacity 400ms ease-in;
 .div-ocultar{
     display: none;
 }
+.transparente{
+    color: #fff;
+    visibility: hidden;
+}
